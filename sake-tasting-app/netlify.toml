@@ -1,0 +1,9 @@
+[build]
+  # This tells Netlify where the final, ready-to-serve files are located
+  publish = "dist" 
+  # This tells Netlify what command to run to generate those files
+  command = "npm run build"
+
+[build.environment]
+  # THIS IS THE CRITICAL LINE: It tells the npm installer to use the safe flag
+  NPM_FLAGS = "--legacy-peer-deps"
