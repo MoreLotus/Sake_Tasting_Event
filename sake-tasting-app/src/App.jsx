@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
 import {
   Map, List, CheckCircle, Star, Wine,
   Loader2, Check, Package, UserCircle, QrCode,
-  AlertTriangle, Edit2, ChevronDown, ChevronUp
+  AlertTriangle, Edit2, ChevronDown, ChevronUp, Scan
 } from 'lucide-react';
 
 // --- Firebase Imports ---
@@ -11,6 +11,14 @@ import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged }
 import {
   getFirestore, doc, setDoc, onSnapshot, collection,
 } from 'firebase/firestore';
+
+// ====================================================================
+// CRITICAL OPTIMIZATION: CODE SPLITTING FOR LARGE DEPENDENCY (QR SCANNER)
+// By using React.lazy, the 'react-qr-scanner' package is now in a separate
+// JavaScript bundle file and will only be downloaded when the ScanView is
+// first displayed. This greatly speeds up the initial page load.
+// ====================================================================
+const LazyQrReader = lazy(() => import("react-qr-scanner"));
 
 // --- CONFIGURATION AND CONSTANTS ---
 
@@ -65,8 +73,6 @@ const StarRating = ({ rating, size = 20, onRate }) => {
   }
   return <div className="flex space-x-1">{stars}</div>;
 };
-
-
 
 const Card = ({ children, className = '' }) => (
   <div className={`bg-white p-4 shadow-xl rounded-xl border border-gray-100 ${className}`}>
@@ -283,7 +289,8 @@ const MapView = ({ sakeData, rankings }) => {
   );
 };
 
-const SakeCard = ({ sake, ranking, updateRanking }) => {
+// --- RENDER OPTIMIZATION: React.memo prevents unnecessary re-renders of list items ---
+const SakeCard = React.memo(({ sake, ranking, updateRanking }) => {
   const currentRating = ranking?.rating || 0;
   const currentNotes = ranking?.notes || '';
   const isTasted = ranking?.tasted || false;
@@ -396,7 +403,7 @@ const SakeCard = ({ sake, ranking, updateRanking }) => {
       </div>
     </Card>
   );
-};
+});
 
 const SakesView = ({ sakeData, rankings, updateRanking }) => {
   return (
@@ -422,143 +429,124 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
   );
 };
 
-// --- NEW SCAN VIEW COMPONENT ---
+// --- SCAN VIEW COMPONENT (Includes LazyQrReader) ---
 
 const ScanView = ({ sakeData, passport, updateRanking }) => {
-    const LazyQrReader = React.lazy(() => import("react-qr-scanner"));
-    const [message, setMessage] = useState('');
-    const [isSuccess, setIsSuccess] = useState(false);
-    const [scanning, setScanning] = useState(true);
+  const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [scanning, setScanning] = useState(true);
 
-    const handleScan = useCallback((result) => {
-        // Only proceed if a result is present AND we are actively scanning
-        if (!scanning || !result || !result.text) {
-            return;
-        }
+  const handleScan = useCallback((result) => {
+    // Only proceed if a result is present AND we are actively scanning
+    if (!scanning || !result || !result.text) {
+      return;
+    }
 
-        const scannedCode = result.text.toLowerCase().trim();
-        setScanning(false); // Stop scanning immediately after detecting the code
+    const scannedCode = result.text.toLowerCase().trim();
+    setScanning(false); // Stop scanning immediately after detecting the code
 
-        const sake = sakeData.find(s => s.id === scannedCode);
-        const isAlreadyStamped = passport[scannedCode]?.tasted;
+    const sake = sakeData.find(s => s.id === scannedCode);
+    const isAlreadyStamped = passport[scannedCode]?.tasted;
 
-        if (!sake) {
-            setMessage(`Error: Code "${scannedCode}" not recognized.`);
-            setIsSuccess(false);
-        } else if (isAlreadyStamped) {
-            setMessage(`Success! You already stamped ${sake.name}.`);
-            setIsSuccess(true);
-        } else {
-            // --- CORE STAMP LOGIC: Update Firestore ---
-            const update = { tasted: true };
-            if (!passport[scannedCode]?.rating) {
-                update.rating = 3;
-            }
-            updateRanking(sake.id, update);
-            setMessage(`STAMPED! You collected the stamp for ${sake.name}!`);
-            setIsSuccess(true);
-        }
-        
-        // After showing the message, reset state to allow another scan after a delay
-        setTimeout(() => {
-            setMessage('');
-            setScanning(true);
-        }, 3000); // 3-second delay before allowing the next scan
-    }, [passport, updateRanking, scanning, sakeData]);
+    if (!sake) {
+      setMessage(`Error: Code "${scannedCode}" not recognized.`);
+      setIsSuccess(false);
+    } else if (isAlreadyStamped) {
+      setMessage(`Success! You already stamped ${sake.name}.`);
+      setIsSuccess(true);
+    } else {
+      // --- CORE STAMP LOGIC: Update Firestore ---
+      const update = { tasted: true };
+      if (!passport[scannedCode]?.rating) {
+        update.rating = 3;
+      }
+      updateRanking(sake.id, update);
+      setMessage(`STAMPED! You collected the stamp for ${sake.name}!`);
+      setIsSuccess(true);
+    }
 
-    const handleError = (err) => {
-        setMessage('Error accessing camera. Please ensure camera permissions are granted.');
-        setIsSuccess(false);
-        console.error(err);
-    };
+    // After showing the message, reset state to allow another scan after a delay
+    setTimeout(() => {
+      setMessage('');
+      setScanning(true);
+    }, 3000); // 3-second delay before allowing the next scan
+  }, [passport, updateRanking, scanning, sakeData]);
 
-    // --- MOCK COMPONENT FOR FALLBACK ---
-    const MockQrReader = ({ onResult, onError }) => {
-        const [mockInput, setMockInput] = useState('');
-        
-        // Check if QrReader is available in the global scope (a common way libraries make themselves available)
-        // If not available, we use the Mock UI for manual input
-        if (typeof QrReader !== 'undefined') {
-            // If the import succeeded, return the real component (although React components shouldn't be called like this)
-            // This structure is purely defensive against module resolution failure.
-            return <div>Error loading scanner component. Check console.</div>; 
-        }
+  const handleError = (err) => {
+    setMessage('Error accessing camera. Please ensure camera permissions are granted.');
+    setIsSuccess(false);
+    console.error(err);
+  };
 
-        return (
-            <div className="flex flex-col items-center justify-center h-full space-y-4 bg-gray-100 p-4">
-                <p className="text-sm text-gray-600 font-semibold">Scanner Unavailable: Enter ID manually:</p>
-                <input
-                    type="text"
-                    placeholder="Enter sake-ID (e.g., sake-1)"
-                    value={mockInput}
-                    onChange={(e) => setMockInput(e.target.value)}
-                    className="px-3 py-2 border rounded-lg w-full text-center"
-                />
-                <button
-                    onClick={() => {
-                        if (mockInput) { onResult({ text: mockInput }); setMockInput(''); }
-                    }}
-                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-lg"
-                >
-                    Simulate Stamp
-                </button>
-            </div>
-        );
-    };
+  // --- MOCK COMPONENT FOR FALLBACK (Simplified, as the LazyQrReader handles the main load) ---
+  const MockQrReader = ({ onResult }) => {
+    const [mockInput, setMockInput] = useState('');
     
-    // We use the imported QrReader if available, otherwise we use the Mock.
-    const ScannerComponent = typeof QrReader !== 'undefined' ? QrReader : MockQrReader;
-
     return (
-        <div className="p-4 flex flex-col items-center justify-start min-h-[80vh]">
-            <h2 className="text-2xl font-extrabold text-gray-800 mb-4 border-b pb-2 w-full flex items-center">
-                <Scan className="w-6 h-6 mr-2 text-red-500" />
-                Stamp Collection (Live Scan)
-            </h2>
-            
-            <Card className="w-full max-w-sm text-center overflow-hidden">
-                <div className="relative w-full aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-inner">
-                    {scanning ? (
-                        <Suspense fallback={<div className="p-8 text-gray-500">Loading scanner...</div>}>
-                          <LazyQrReader
-                              delay={300}
-                              onError={handleError}
-                              onScan={handleScan}
-                              constraints={{ facingMode: "environment" }}
-                              style={{ width: "100%", height: "100%" }}
-                          />
-                        </Suspense>
-                        /*
-                        <ScannerComponent
-                            delay={300} 
-                            onError={handleError}
-                            onResult={handleScan}
-                            constraints={{ facingMode: 'environment' }} 
-                            style={{ width: '100%', height: '100%' }}
-                            className="w-full h-full object-cover"
-                        />
-                        */
-                    ) : (
-                        <div className="flex flex-col items-center justify-center h-full text-indigo-500 bg-gray-50">
-                            <CheckCircle className="w-10 h-10 mb-2 animate-pulse" />
-                            <p className="font-semibold text-sm">Processing Scan...</p>
-                        </div>
-                    )}
-                    <div className="absolute inset-0 border-8 border-dashed border-indigo-400 opacity-70 rounded-xl pointer-events-none"></div>
-                </div>
-                <div className="mt-3 text-sm text-gray-600">
-                    {scanning ? 'Point camera at the booth QR code.' : 'Stamp Collected!'}
-                </div>
-            </Card>
-
-            {/* Status Message */}
-            {message && (
-                <div className={`mt-4 w-full max-w-sm p-3 rounded-lg font-semibold shadow-md ${isSuccess ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                    {message}
-                </div>
-            )}
-        </div>
+      <div className="flex flex-col items-center justify-center h-full space-y-4 bg-gray-100 p-4">
+        <p className="text-sm text-gray-600 font-semibold">Scanner Unavailable: Enter ID manually:</p>
+        <input
+          type="text"
+          placeholder="Enter sake-ID (e.g., sake-1)"
+          value={mockInput}
+          onChange={(e) => setMockInput(e.target.value)}
+          className="px-3 py-2 border rounded-lg w-full text-center"
+        />
+        <button
+          onClick={() => {
+            if (mockInput) { onResult({ text: mockInput }); setMockInput(''); }
+          }}
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-lg"
+        >
+          Simulate Stamp
+        </button>
+      </div>
     );
+  };
+    
+  return (
+    <div className="p-4 flex flex-col items-center justify-start min-h-[80vh]">
+      <h2 className="text-2xl font-extrabold text-gray-800 mb-4 border-b pb-2 w-full flex items-center">
+        <Scan className="w-6 h-6 mr-2 text-red-500" />
+        Stamp Collection (Live Scan)
+      </h2>
+      
+      <Card className="w-full max-w-sm text-center overflow-hidden">
+        <div className="relative w-full aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-inner">
+          {scanning ? (
+            // Use Suspense to wrap the LazyQrReader
+            <Suspense fallback={<div className="p-8 text-gray-500">Loading scanner...</div>}>
+              <LazyQrReader
+                delay={300}
+                onError={handleError}
+                onScan={handleScan}
+                constraints={{ facingMode: "environment" }}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </Suspense>
+          ) : (
+            <div className="flex flex-col items-center justify-center h-full text-indigo-500 bg-gray-50">
+              <CheckCircle className="w-10 h-10 mb-2 animate-pulse" />
+              <p className="font-semibold text-sm">Processing Scan...</p>
+            </div>
+          )}
+          <div className="absolute inset-0 border-8 border-dashed border-indigo-400 opacity-70 rounded-xl pointer-events-none"></div>
+        </div>
+        <div className="mt-3 text-sm text-gray-600">
+          {scanning ? 'Point camera at the booth QR code.' : 'Stamp Collected!'}
+        </div>
+      </Card>
+
+      {/* Status Message */}
+      {message && (
+        <div className={`mt-4 w-full max-w-sm p-3 rounded-lg font-semibold shadow-md ${isSuccess ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+          {message}
+        </div>
+      )}
+      {/* If the LazyQrReader fails to load, use the Mock component for manual input */}
+      {typeof LazyQrReader === 'undefined' && <MockQrReader onResult={handleScan} />}
+    </div>
+  );
 };
 
 const MyRankingsView = ({ sakeData, rankings, userId }) => {
@@ -660,25 +648,28 @@ const App = () => {
       return <Loader message="Loading your tasting history..." />;
     }
 
-    // Wrap content in a div that is scrollable, allowing the header/footer to be fixed
+    // Wrap the entire view rendering in Suspense to handle lazy loading
     return (
-      <div className="overflow-y-auto h-full">
-        {(() => {
+      <Suspense fallback={<Loader message="Loading View..." />}>
+        <div className="overflow-y-auto h-full">
+          {(() => {
             switch (currentView) {
-                case VIEWS.MAP:
-                    return <MapView sakeData={SAKE_DATA} rankings={rankings} />;
-                case VIEWS.SAKES:
-                    return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} />;
-                case VIEWS.SCAN: // <-- NEW: THIS DISPLAYS THE SCANNER VIEW
-                    return <ScanView sakeData={SAKE_DATA} passport={rankings} updateRanking={updateRanking} />;
-                case VIEWS.MY_PASSPORT:
-                    return <MyRankingsView sakeData={SAKE_DATA} rankings={rankings} userId={userId} />;
-                default:
-                    return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} />;
+              case VIEWS.MAP:
+                return <MapView sakeData={SAKE_DATA} rankings={rankings} />;
+              case VIEWS.SAKES:
+                return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} />;
+              case VIEWS.SCAN: 
+                // The ScanView component is loaded lazily, leveraging the Code Splitting
+                return <ScanView sakeData={SAKE_DATA} passport={rankings} updateRanking={updateRanking} />;
+              case VIEWS.PASSPORT:
+                return <MyRankingsView sakeData={SAKE_DATA} rankings={rankings} userId={userId} />;
+              default:
+                return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} />;
             }
-        })()}
-        <div className="h-4"></div> {/* Small buffer for scroll clearance */}
-      </div>
+          })()}
+          <div className="h-4"></div> {/* Small buffer for scroll clearance */}
+        </div>
+      </Suspense>
     );
   };
 
@@ -732,14 +723,15 @@ const NavItem = ({ view, currentView, setCurrentView }) => {
   const icon = {
     [VIEWS.SAKES]: List,
     [VIEWS.MAP]: Map,
-    [VIEWS.PASSPORT]: QrCode, // Represents the digital stamp card/passport
+    [VIEWS.SCAN]: Scan, // Use the proper Scan icon here
+    [VIEWS.PASSPORT]: QrCode, 
   }[view];
   const IconComponent = icon || List;
 
   return (
     <button
       onClick={() => setCurrentView(view)}
-      className={`flex flex-col items-center justify-center p-3 sm:p-4 w-1/3 transition-colors duration-200 ${
+      className={`flex flex-col items-center justify-center p-3 sm:p-4 w-1/4 transition-colors duration-200 ${
         isActive ? 'text-red-700 bg-red-50' : 'text-gray-500 hover:text-red-500'
       }`}
     >
