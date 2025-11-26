@@ -4,8 +4,6 @@ import {
   Loader2, Check, Package, UserCircle, QrCode,
   AlertTriangle, Edit2, ChevronDown, ChevronUp
 } from 'lucide-react';
-import QrReader from 'react-qr-scanner';
-
 
 // --- Firebase Imports ---
 import { initializeApp } from 'firebase/app';
@@ -427,6 +425,7 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
 // --- NEW SCAN VIEW COMPONENT ---
 
 const ScanView = ({ sakeData, passport, updateRanking }) => {
+    const LazyQrReader = React.lazy(() => import("react-qr-scanner"));
     const [message, setMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
     const [scanning, setScanning] = useState(true);
@@ -520,6 +519,16 @@ const ScanView = ({ sakeData, passport, updateRanking }) => {
             <Card className="w-full max-w-sm text-center overflow-hidden">
                 <div className="relative w-full aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-inner">
                     {scanning ? (
+                        <Suspense fallback={<div className="p-8 text-gray-500">Loading scanner...</div>}>
+                          <LazyQrReader
+                              delay={300}
+                              onError={handleError}
+                              onScan={handleScan}
+                              constraints={{ facingMode: "environment" }}
+                              style={{ width: "100%", height: "100%" }}
+                          />
+                        </Suspense>
+                        /*
                         <ScannerComponent
                             delay={300} 
                             onError={handleError}
@@ -528,6 +537,7 @@ const ScanView = ({ sakeData, passport, updateRanking }) => {
                             style={{ width: '100%', height: '100%' }}
                             className="w-full h-full object-cover"
                         />
+                        */
                     ) : (
                         <div className="flex flex-col items-center justify-center h-full text-indigo-500 bg-gray-50">
                             <CheckCircle className="w-10 h-10 mb-2 animate-pulse" />
