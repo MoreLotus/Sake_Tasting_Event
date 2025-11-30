@@ -1,19 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
 import { doc, setDoc, onSnapshot, collection } from 'firebase/firestore';
-import { logEvent } from 'firebase/analytics'; // 💡 NEW: Import logEvent
-import { appId, SAKE_DATA } from '../config/constants'; // 💡 NEW: Import SAKE_DATA
+import { logEvent } from 'firebase/analytics'; 
+import { appId, SAKE_DATA } from '../config/constants';
 
-// 💡 Accept the analytics instance as an argument
-const useSakeRankings = (db, userId, isAuthReady) => { 
+// 🚀 FIX 1: Added 'analytics' to the arguments list
+const useSakeRankings = (db, userId, isAuthReady, analytics) => { 
     const [rankings, setRankings] = useState({});
-    const [loading, setLoading] = useState(false);
+    // 💡 Changed loading to false initially, per previous discussion (UI Shell pattern)
+    const [loading, setLoading] = useState(false); 
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Don't run until auth is ready. But don't block the UI.
+        // Don't run until auth is ready.
         if (!isAuthReady) return;
 
-        // If no user is signed in, clear rankings but don't show loaders
+        // If no user is signed in, clear rankings.
         if (!db || !userId) {
             setRankings({});
             return;
@@ -22,6 +23,8 @@ const useSakeRankings = (db, userId, isAuthReady) => {
         // Start loading in background
         setLoading(true);
 
+        // ✅ FIX 3: Using the correct template string method for the collection path
+        // The path structure "collection/doc/collection/doc/collection" is inferred by the SDK
         const q = collection(db, "artifacts", appId, "users", userId, "sakeRankings");
 
         const unsubscribe = onSnapshot(
@@ -45,14 +48,19 @@ const useSakeRankings = (db, userId, isAuthReady) => {
 
     }, [db, userId, isAuthReady]);
 
-    // 💡 Logging logic added to updateRanking
     const updateRanking = useCallback(async (sakeId, updates) => {
         if (!db || !userId) {
             console.warn("Database not ready or User not logged in.");
             return;
         }
 
-        const docRef = doc(db, `/artifacts/${appId}/users/${userId}/sakeRankings`, sakeId);
+        // ✅ FIX 2: Correct Firestore doc path syntax using comma-separated segments
+        const docRef = doc(
+            db, 
+            "artifacts", appId, 
+            "users", userId, 
+            "sakeRankings", sakeId 
+        );
 
         const currentData = rankings[sakeId] || {
             rating: 0,
