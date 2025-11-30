@@ -7,7 +7,7 @@ import { appId, SAKE_DATA } from '../config/constants';
 const useSakeRankings = (db, userId, isAuthReady, analytics) => { 
     const [rankings, setRankings] = useState({});
     // 💡 Changed loading to false initially, per previous discussion (UI Shell pattern)
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(null);
 
     useEffect(() => {
