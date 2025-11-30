@@ -3,7 +3,6 @@ import { doc, setDoc, onSnapshot, collection } from 'firebase/firestore';
 import { logEvent } from 'firebase/analytics'; 
 import { appId, SAKE_DATA } from '../config/constants';
 
-<<<<<<< HEAD
 // 💡 Accept the analytics instance as an argument
 const useSakeRankings = (db, userId, isAuthReady) => { 
     const [rankings, setRankings] = useState({});
@@ -15,20 +14,6 @@ const useSakeRankings = (db, userId, isAuthReady) => {
         if (!isAuthReady) return;
 
         // If no user is signed in, clear rankings but don't show loaders
-=======
-// 🚀 FIX 1: Added 'analytics' to the arguments list
-const useSakeRankings = (db, userId, isAuthReady, analytics) => { 
-    const [rankings, setRankings] = useState({});
-    // 💡 Changed loading to false initially, per previous discussion (UI Shell pattern)
-    const [loading, setLoading] = useState(true); 
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        // Don't run until auth is ready.
-        if (!isAuthReady) return;
-
-        // If no user is signed in, clear rankings.
->>>>>>> 28630fe03d68641035602c8b735610cad055cf94
         if (!db || !userId) {
             setRankings({});
             return;
@@ -37,11 +22,6 @@ const useSakeRankings = (db, userId, isAuthReady, analytics) => {
         // Start loading in background
         setLoading(true);
 
-<<<<<<< HEAD
-=======
-        // ✅ FIX 3: Using the correct template string method for the collection path
-        // The path structure "collection/doc/collection/doc/collection" is inferred by the SDK
->>>>>>> 28630fe03d68641035602c8b735610cad055cf94
         const q = collection(db, "artifacts", appId, "users", userId, "sakeRankings");
 
         const unsubscribe = onSnapshot(
@@ -62,16 +42,10 @@ const useSakeRankings = (db, userId, isAuthReady, analytics) => {
         );
 
         return () => unsubscribe();
-<<<<<<< HEAD
 
     }, [db, userId, isAuthReady]);
 
     // 💡 Logging logic added to updateRanking
-=======
-
-    }, [db, userId, isAuthReady]);
-
->>>>>>> 28630fe03d68641035602c8b735610cad055cf94
     const updateRanking = useCallback(async (sakeId, updates) => {
         if (!db || !userId) {
             console.warn("Database not ready or User not logged in.");
