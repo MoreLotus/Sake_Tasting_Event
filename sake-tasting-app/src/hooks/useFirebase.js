@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { getAnalytics } from 'firebase/analytics'; // 💡 NEW: Import getAnalytics
 import { firebaseConfig, initialAuthToken } from '../config/constants';
 
 const useFirebase = () => {
@@ -9,6 +10,7 @@ const useFirebase = () => {
     const [auth, setAuth] = useState(null);
     const [userId, setUserId] = useState(null);
     const [isAuthReady, setIsAuthReady] = useState(false);
+    const [analytics, setAnalytics] = useState(null); // 💡 NEW: Analytics state
 
     useEffect(() => {
         try {
@@ -18,11 +20,14 @@ const useFirebase = () => {
             const app = initializeApp(firebaseConfig);
             const authInstance = getAuth(app);
             const dbInstance = getFirestore(app);
+            const analyticsInstance = getAnalytics(app); // 💡 Initialize Analytics
 
             setDb(dbInstance);
             setAuth(authInstance);
+            setAnalytics(analyticsInstance); // 💡 Set the Analytics instance
 
             const authenticate = async () => {
+                // ... (rest of the existing authentication logic)
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(authInstance, initialAuthToken);
@@ -58,7 +63,8 @@ const useFirebase = () => {
         }
     }, []);
 
-    return { db, auth, userId, isAuthReady };
+    // 💡 Return the analytics instance
+    return { db, auth, userId, isAuthReady, analytics }; 
 };
 
 export default useFirebase;

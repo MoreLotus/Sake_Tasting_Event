@@ -15,8 +15,8 @@ import MyRankingsView from './views/MyRankingsView';
 
 const App = () => {
   const [currentView, setCurrentView] = useState(VIEWS.SAKES);
-  const { db, userId, isAuthReady } = useFirebase();
-  const { rankings, loading, error, updateRanking } = useSakeRankings(db, userId, isAuthReady);
+  const { db, userId, isAuthReady, analytics } = useFirebase();
+  const { rankings, loading, error, updateRanking } = useSakeRankings(db, userId, isAuthReady, analytics);
 
   const renderContent = () => {
     if (!isAuthReady) {

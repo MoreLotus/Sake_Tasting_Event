@@ -1,11 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getFirestore, doc, setDoc, onSnapshot, collection } from 'firebase/firestore';
-import { appId } from '../config/constants';
+import { doc, setDoc, onSnapshot, collection } from 'firebase/firestore';
+import { logEvent } from 'firebase/analytics'; // 💡 NEW: Import logEvent
+import { appId, SAKE_DATA } from '../config/constants'; // 💡 NEW: Import SAKE_DATA
 
-const useSakeRankings = (db, userId, isAuthReady) => {
+// 💡 Accept the analytics instance as an argument
+const useSakeRankings = (db, userId, isAuthReady, analytics) => { 
     const [rankings, setRankings] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    // ... (existing useEffect to fetch rankings remains unchanged)
 
     useEffect(() => {
         if (!db || !userId || !isAuthReady) {
@@ -39,6 +43,8 @@ const useSakeRankings = (db, userId, isAuthReady) => {
         return () => unsubscribe();
     }, [db, userId, isAuthReady]);
 
+
+    // 💡 Logging logic added to updateRanking
     const updateRanking = useCallback(async (sakeId, updates) => {
         if (!db || !userId) {
             console.warn("Database not ready or User not logged in.");
@@ -64,11 +70,23 @@ const useSakeRankings = (db, userId, isAuthReady) => {
 
         try {
             await setDoc(docRef, updatePayload, { merge: true });
+            
+            // 🚀 ANALYTICS TRACKING: Log event on successful update
+            if (analytics && (updates.tasted || updates.rating)) {
+                const sake = SAKE_DATA.find(s => s.id === sakeId);
+                logEvent(analytics, 'sake_ranked_stamped', {
+                    sake_id: sakeId,
+                    sake_name: sake ? sake.name : 'Unknown',
+                    new_rating: updatePayload.rating,
+                    stamped: updatePayload.tasted ? 'yes' : 'no'
+                });
+            }
+
         } catch (e) {
             console.error("Error updating ranking:", e);
             setError("Could not save your ranking. Please try again.");
         }
-    }, [db, userId, rankings]);
+    }, [db, userId, rankings, analytics]); // Dependency added
 
     return { rankings, loading, error, updateRanking };
 };
