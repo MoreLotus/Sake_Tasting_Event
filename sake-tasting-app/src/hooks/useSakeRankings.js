@@ -3,19 +3,21 @@ import { doc, setDoc, onSnapshot, collection } from 'firebase/firestore';
 import { logEvent } from 'firebase/analytics'; 
 import { appId, SAKE_DATA } from '../config/constants';
 
-// 💡 Accept the analytics instance as an argument
-const useSakeRankings = (db, userId, isAuthReady) => { 
+// 🚀 FIX 1: ADDED 'analytics' to the list of expected arguments (props)
+const useSakeRankings = (db, userId, isAuthReady, analytics) => { 
+    // 🚀 FIX 2: Set the initial loading state back to TRUE
     const [rankings, setRankings] = useState({});
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Don't run until auth is ready. But don't block the UI.
+        // Don't run until auth is ready.
         if (!isAuthReady) return;
 
-        // If no user is signed in, clear rankings but don't show loaders
         if (!db || !userId) {
             setRankings({});
+            // If data is unavailable (e.g., Firebase not connected yet), stop loading.
+            setLoading(false); 
             return;
         }
 
@@ -45,14 +47,12 @@ const useSakeRankings = (db, userId, isAuthReady) => {
 
     }, [db, userId, isAuthReady]);
 
-    // 💡 Logging logic added to updateRanking
     const updateRanking = useCallback(async (sakeId, updates) => {
         if (!db || !userId) {
             console.warn("Database not ready or User not logged in.");
             return;
         }
 
-        // ✅ FIX 2: Correct Firestore doc path syntax using comma-separated segments
         const docRef = doc(
             db, 
             "artifacts", appId, 
@@ -93,7 +93,7 @@ const useSakeRankings = (db, userId, isAuthReady) => {
             console.error("Error updating ranking:", e);
             setError("Could not save your ranking. Please try again.");
         }
-    }, [db, userId, rankings, analytics]); // Dependency added
+    }, [db, userId, rankings, analytics]); 
 
     return { rankings, loading, error, updateRanking };
 };
