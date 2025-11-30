@@ -4,45 +4,46 @@ import { logEvent } from 'firebase/analytics'; // 💡 NEW: Import logEvent
 import { appId, SAKE_DATA } from '../config/constants'; // 💡 NEW: Import SAKE_DATA
 
 // 💡 Accept the analytics instance as an argument
-const useSakeRankings = (db, userId, isAuthReady, analytics) => { 
+const useSakeRankings = (db, userId, isAuthReady) => { 
     const [rankings, setRankings] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // ... (existing useEffect to fetch rankings remains unchanged)
-
     useEffect(() => {
-        if (!db || !userId || !isAuthReady) {
-            if (isAuthReady) setLoading(false);
+        // Don't run until auth is ready. But don't block the UI.
+        if (!isAuthReady) return;
+
+        // If no user is signed in, clear rankings but don't show loaders
+        if (!db || !userId) {
+            setRankings({});
             return;
         }
 
-        const collectionPath = `/artifacts/${appId}/users/${userId}/sakeRankings`;
-        const q = collection(db, collectionPath);
-
+        // Start loading in background
         setLoading(true);
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            try {
+
+        const q = collection(db, "artifacts", appId, "users", userId, "sakeRankings");
+
+        const unsubscribe = onSnapshot(
+            q,
+            (snapshot) => {
                 const newRankings = {};
                 snapshot.forEach((doc) => {
                     newRankings[doc.id] = doc.data();
                 });
                 setRankings(newRankings);
                 setLoading(false);
-            } catch (e) {
-                console.error("Error fetching rankings:", e);
+            },
+            (e) => {
+                console.error("Firestore onSnapshot error:", e);
                 setError("Failed to load your tasting passport data.");
                 setLoading(false);
             }
-        }, (e) => {
-            console.error("Firestore onSnapshot error:", e);
-            setError("Real-time connection failed. Check your network.");
-            setLoading(false);
-        });
+        );
 
         return () => unsubscribe();
-    }, [db, userId, isAuthReady]);
 
+    }, [db, userId, isAuthReady]);
 
     // 💡 Logging logic added to updateRanking
     const updateRanking = useCallback(async (sakeId, updates) => {
