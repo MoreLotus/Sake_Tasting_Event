@@ -45,10 +45,6 @@ const useSakeRankings = (db, userId, isAuthReady) => {
 
     }, [db, userId, isAuthReady]);
 
-    return { rankings, loading, error };
-};
-
-
     // 💡 Logging logic added to updateRanking
     const updateRanking = useCallback(async (sakeId, updates) => {
         if (!db || !userId) {
