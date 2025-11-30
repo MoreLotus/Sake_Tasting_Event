@@ -559,4 +559,57 @@ const App = () => {
             <Wine className="w-6 h-6 mr-2 fill-red-700" />
             Sake Passport
           </h1>
-          <div className="flex items-
+          <div className="flex items-center space-x-2 text-sm text-gray-500">
+            {userId && <UserCircle className="w-5 h-5" />}
+            <span className="truncate max-w-[80px] text-xs">ID: {userId ? userId.substring(0, 5) : 'Guest'}...</span>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content Area (Scrollable) */}
+      <main className="flex-grow w-full overflow-hidden">
+        {renderContent()}
+      </main>
+
+      {/* Mobile Navigation (Fixed Bottom) */}
+      <nav className="flex-shrink-0 bg-white border-t border-gray-200 shadow-2xl z-20">
+        <div className="flex justify-around">
+          {/* Note: Nav now divides space among 3 items */}
+          {Object.values(VIEWS).map((view) => (
+            <NavItem
+              key={view}
+              view={view}
+              currentView={currentView}
+              setCurrentView={setCurrentView}
+            />
+          ))}
+        </div>
+      </nav>
+    </div>
+  );
+};
+
+const NavItem = ({ view, currentView, setCurrentView }) => {
+  const isActive = view === currentView;
+  const icon = {
+    [VIEWS.SAKES]: List,
+    [VIEWS.MAP]: Map,
+    [VIEWS.PASSPORT]: QrCode, 
+  }[view];
+  const IconComponent = icon || List;
+
+  return (
+    <button
+      onClick={() => setCurrentView(view)}
+      // Updated width to w-1/3 to divide space among 3 navigation items
+      className={`flex flex-col items-center justify-center p-3 sm:p-4 w-1/3 transition-colors duration-200 ${
+        isActive ? 'text-red-700 bg-red-50' : 'text-gray-500 hover:text-red-500'
+      }`}
+    >
+      <IconComponent className="w-6 h-6 mb-1" />
+      <span className="text-xs font-semibold">{view.replace('Passport', 'My Passport')}</span>
+    </button>
+  );
+};
+
+export default App;
