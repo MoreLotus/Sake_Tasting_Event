@@ -75,10 +75,10 @@ const App = () => {
                         <Wine className="w-6 h-6 mr-2 fill-red-700" />
                         Sake Passport
                     </h1>
-                    <div className="flex items-center space-x-2 text-sm text-gray-500">
-                        {/*{userId && <UserCircle className="w-5 h-5" />}*/}
-                        {/*<span className="truncate max-w-[80px] text-xs">ID: {userId ? userId.substring(0, 5) : 'Guest'}...</span>*/}
-                    </div>
+                    {/*<div className="flex items-center space-x-2 text-sm text-gray-500">
+                        {{userId && <UserCircle className="w-5 h-5" />}}
+                        {<span className="truncate max-w-[80px] text-xs">ID: {userId ? userId.substring(0, 5) : 'Guest'}...</span>}
+                    </div>*/}
                 </div>
             </header>
 

@@ -26,9 +26,9 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
                     <QrCode className="w-6 h-6 mr-2" />
                     My Tasting Passport
                 </h2>
-                <p className="text-red-700 font-mono text-xs overflow-hidden truncate">
+                {/*<p className="text-red-700 font-mono text-xs overflow-hidden truncate">
                     User ID: {userId || 'Authenticating...'}
-                </p>
+                </p>*/}
             </Card>
 
             <Card className="grid grid-cols-2 gap-4 text-center">
