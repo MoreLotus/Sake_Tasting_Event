@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { getAnalytics } from 'firebase/analytics'; // 💡 NEW: Import getAnalytics
+import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore'; // 💡 FIX 1: Added enableIndexedDbPersistence
+import { getAnalytics } from 'firebase/analytics'; 
 import { firebaseConfig, initialAuthToken } from '../config/constants';
 
 const useFirebase = () => {
@@ -10,7 +10,7 @@ const useFirebase = () => {
     const [auth, setAuth] = useState(null);
     const [userId, setUserId] = useState(null);
     const [isAuthReady, setIsAuthReady] = useState(false);
-    const [analytics, setAnalytics] = useState(null); // 💡 NEW: Analytics state
+    const [analytics, setAnalytics] = useState(null);
 
     useEffect(() => {
         try {
@@ -20,14 +20,33 @@ const useFirebase = () => {
             const app = initializeApp(firebaseConfig);
             const authInstance = getAuth(app);
             const dbInstance = getFirestore(app);
-            const analyticsInstance = getAnalytics(app); // 💡 Initialize Analytics
+            const analyticsInstance = getAnalytics(app);
+
+            // 💡 FIX 2: Implementation of Persistence Logic
+            const enablePersistence = async () => {
+                try {
+                    // This function attempts to set up local data storage (IndexedDB).
+                    // This is key for instant loading and persistent data on repeat visits.
+                    await enableIndexedDbPersistence(dbInstance);
+                    console.log("Firestore persistence enabled.");
+                } catch (err) {
+                    if (err.code === 'failed-precondition') {
+                        // This happens if the user has multiple tabs open accessing Firestore.
+                        console.warn("Firestore persistence failed: Multiple tabs open or already enabled.");
+                    } else if (err.code === 'unimplemented') {
+                        // Browser does not support IndexedDB (very rare).
+                        console.warn("Firestore persistence failed: Browser not supported.");
+                    }
+                }
+            }
+            
+            enablePersistence(); // Run the async function immediately
 
             setDb(dbInstance);
             setAuth(authInstance);
-            setAnalytics(analyticsInstance); // 💡 Set the Analytics instance
+            setAnalytics(analyticsInstance);
 
             const authenticate = async () => {
-                // ... (rest of the existing authentication logic)
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(authInstance, initialAuthToken);
