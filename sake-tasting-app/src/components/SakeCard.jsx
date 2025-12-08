@@ -40,13 +40,13 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking }) => {
             {/* Sake Header */}
             <div className="flex-grow space-y-1 w-full">
                 <h3 className="text-xl font-extrabold text-gray-900">{sake.name}</h3>
-                <p className="text-sm text-gray-600 font-medium">{sake.brewery} ({sake.region})</p>
+                <p className="text-sm text-gray-600 font-medium">{sake.brewery} ({sake.abv})</p>
                 <div className="flex flex-wrap items-center space-x-2 text-sm text-red-600">
                     <Wine className="w-4 h-4" />
-                    <span className="font-semibold">{sake.style}</span>
+                    <span className="font-semibold">{sake.type}</span>
                     <span className="font-light text-gray-400 hidden sm:inline">|</span>
                     <span className="text-sm font-light text-gray-500 mt-1 sm:mt-0">
-                        {sake.location}
+                        Pairs with {sake.pairs}
                     </span>
                 </div>
             </div>
@@ -65,6 +65,10 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking }) => {
             {showNotes && (
                 <div className="w-full space-y-4 pt-2 border-t border-gray-100">
                     <div className='p-3 bg-gray-50 rounded-lg text-sm text-gray-700'>
+                        <p className='font-bold mb-1 text-red-600'>Description:</p>
+                        <p className='italic'>{sake.description}</p>
+                    </div>
+                    <div className='p-4 bg-gray-50 rounded-lg text-sm text-gray-700'>
                         <p className='font-bold mb-1 text-red-600'>Official Flavor Profile:</p>
                         <p className='italic'>{sake.flavor}</p>
                     </div>

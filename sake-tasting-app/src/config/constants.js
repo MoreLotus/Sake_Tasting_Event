@@ -16,13 +16,18 @@ export const firebaseConfig = {
 export const initialAuthToken = null;
 
 export const SAKE_DATA = [
-    { id: 'sake-1', name: 'Dassai 45', brewery: 'Asahi Shuzo', region: 'Yamaguchi', style: 'Junmai Daiginjo', location: 'Booth A1', flavor: 'Fruity, elegant, clean finish.' },
-    { id: 'sake-2', name: 'Kubota Senju', brewery: 'Asahi Shuzo', region: 'Niigata', style: 'Ginjo', location: 'Booth A2', flavor: 'Light, crisp, and dry with a hint of sweetness.' },
-    { id: 'sake-3', name: 'Hakkaisan', brewery: 'Hakkaisan Brewery', region: 'Niigata', style: 'Junmai Ginjo', location: 'Booth B1', flavor: 'Clean, smooth, subtle aroma. Excellent food pairing.' },
-    { id: 'sake-4', name: 'Wakatake Onikoroshi', brewery: 'Ohmuraya Shuzo', region: 'Shizuoka', style: 'Junmai', location: 'Booth B2', flavor: 'Bold and dry, strong flavor profile, masculine sake.' },
-    { id: 'sake-5', name: 'Tamagawa Ice Breaker', brewery: 'Tamagawa', region: 'Kyoto', style: 'Junmai Namazake', location: 'Booth C1', flavor: 'Unpasteurized and vibrant. Best served chilled or on the rocks.' },
-    { id: 'sake-6', name: 'Tatenokawa 50', brewery: 'Tatenokawa Shuzo', region: 'Yamagata', style: 'Junmai Daiginjo', location: 'Booth C2', flavor: 'Soft, well-rounded, notes of pear and melon.' },
-];
+    { id: 'sake-1', name: 'Funaguchi', brewery: 'Kikusi', type: 'Nama Genshu', description: 'Funaguchi Kikusui Ichiban Shibori is Japans #1 unpasteurized, undiluted, cask strength nama sake, with a rich, full-bodied flavor and a refreshing.', location: 'Booth A1', abv: '19%' ,flavor: 'Unique taste of steamed rice, roasted hazelnuts, and tropical fruit.', pairs: 'Seafood, Meat'},
+    { id: 'sake-2', name: 'Junmai Ginjo', brewery: 'Arizona Sake', type: 'Nama', description: '2018 Tokyo Sake Competition – Gold Medal – Best Sake produced outside of Japan.', location: 'Booth A2', abv: '15%', flavor: 'Mix of blueberry, pear, and peach. Slightly sweet, fresh, smooth.', pairs: 'Cheese or Savory Foods'},
+    { id: 'sake-3', name: 'Mio Sparkling', brewery: 'Shirakabegura', type: 'Sparkling', description: 'Named using the Japanese word for areas of light, shallow water in oceans or rivers, this sparkling sake has a playful carbonation.', location: 'Booth B1', abv: '5%' ,flavor: 'Flavors of grape and pear.', pairs: 'Aperitif'},
+    { id: 'sake-4', name: 'Hana Lychee', brewery: 'Takara', type: 'Flavored Sake', description: 'Captivating lychee aromatics and a sweet, full-bodied palate.', location: 'Booth B2', abv: '8%', flavor: 'Flavors of lychee, peach, and lemon.', pairs: 'Desserts'},
+    { id: 'sake-5', name: 'Hana Apple', brewery: 'Takara', type: 'Flavored Sake', description: 'This is a highly aromatic sake, overfl owing with ripe Fuji apple and marzipan.', location: 'Booth C1', abv: '8%', flavor: 'Hints of apple and white chocolate.', pairs: 'Desserts'},
+    { id: 'sake-6', name: 'Junmai ', brewery: 'Sho Chiku Bai', type: 'Junmai', description: 'classic, full-bodied Japanese sake known for its smooth, well-balanced profile.', location: 'Booth C2', abv: '16%', flavor: 'Flavors of vanilla, Cream, Spice, Cardamom.', pairs: 'Seafood, Meat'},
+    { id: 'sake-7', name: 'Roku ', brewery: 'Suntory', type: 'Gin', description: 'Means "6" in Japanese, made with six natural botanicals of sakura flower, sakura leaf, yuzu peel, green tea, gyokuro tea, and sanaho pepper.', location: 'Booth D1', abv: '43%', flavor: 'Mix of juniper, floral, and citrus flavors.', pairs: 'Seafood, Meat'},
+    { id: 'sake-8', name: 'Haku ', brewery: 'Suntory', type: 'Vodka', description: 'Means "white" in Japanese, made from white rice and then bamboo charcoal filtered giving the vodka a soft, mellow character.', location: 'Booth D2', abv: '40%', flavor: 'A clean, neutral, and mineral flavor.', pairs: 'Sushi'},
+    { id: 'sake-9', name: 'Toki ', brewery: 'Hibiki', type: 'Whisky', description: 'Means "time" in Japanese. This clear gold spirit features aromas of basil, green apple, and honey.', location: 'Booth E1', abv: '43%', flavor: 'Hints of vanilla oak, white pepper, and ginger.', pairs: 'Fried, Grilled Food'},
+    { id: 'sake-10', name: 'Spellbinder ', brewery: 'Wren House', type: 'Hazy IPA', description: '2020 Great American Beer Festival Gold Medal Winner.', location: 'Booth E2', abv: '7%', flavor: 'Juicy, citrus, tropical, cream.', pairs: 'Seafood'},
+    { id: 'sake-11', name: 'Valley ', brewery: 'Wren House', type: 'Lager', description: 'GABF 2019 Silver, CBA Silver Winner - American Lager.', location: 'Booth F1', abv: '4.6%', flavor: 'Crisp, clean, honey and spice.', pairs: 'Spicy Food'},
+]
 
 export const VIEWS = {
     MAP: 'Map',
