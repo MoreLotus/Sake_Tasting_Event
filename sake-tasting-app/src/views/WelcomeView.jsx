@@ -3,6 +3,11 @@
 import React from 'react';
 import { Card } from '../components/Utility';
 import { Sparkles, Cherry, Wine } from 'lucide-react'; // Example icons for cultural flair
+import logo1 from './custom_image/bluejppeko.png';
+import logo2 from './custom_image/MAINlogo.png';
+import logo3 from './custom_image/pinkjppeko.png';
+
+
 
 const WelcomeView = () => {
   return (
@@ -37,13 +42,13 @@ const WelcomeView = () => {
       <div className="flex justify-around items-center w-full max-w-md p-4 bg-yellow-100">
         {/* Placeholder for Japanese Fan */}
         <div className="w-16 h-16 bg-yellow-300 rounded-full flex items-center justify-center text-white text-3xl font-bold opacity-75">
-          扇
+        <img src={logo1} alt="logo1" className="w-16 h-16 mr-2 object-contain"/>
         </div>
         {/* Placeholder for Cherry Blossom */}
-        <Cherry className="w-12 h-12 text-blue-500 animate-pulse" />
+        <img src={logo2} alt="logo2" className="w-16 h-16 mr-2 object-contain"/>
         {/* Placeholder for Torii Gate */}
         <div className="w-16 h-16 bg-yellow-300 rounded flex items-center justify-center text-white text-2xl font-bold opacity-75">
-          ⛩️
+        <img src={logo3} alt="logo3" className="w-16 h-16 mr-2 object-contain"/>
         </div>
       </div>
 
@@ -54,5 +59,4 @@ const WelcomeView = () => {
     </div>
   );
 };
-
 export default WelcomeView;
