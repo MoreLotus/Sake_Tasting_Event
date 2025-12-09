@@ -3,9 +3,9 @@
 import React from 'react';
 import { Card } from '../components/Utility';
 import { Sparkles, Cherry, Wine } from 'lucide-react'; // Example icons for cultural flair
-import logo1 from './custom_image/bluejppeko.png';
-import logo2 from './custom_image/MAINlogo.png';
-import logo3 from './custom_image/pinkjppeko.png';
+import logo1 from '../custom_image/bluejppeko.png';
+import logo2 from '../custom_image/MAINlogo.png';
+import logo3 from '../custom_image/pinkjppeko.png';
 
 
 
