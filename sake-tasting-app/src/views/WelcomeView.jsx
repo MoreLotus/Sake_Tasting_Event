@@ -13,7 +13,7 @@ const WelcomeView = () => {
   return (
     <div className="p-4 space-y-6 flex flex-col items-center text-center">
       {/* Event Header Card */}
-      <Card className="bg-yellow-50 border-yellow-300 shadow-lg w-full max-w-md">
+      <Card className="bg-yellow-100 border-yellow-300 shadow-lg w-full max-w-md">
         <h1 className="text-3xl font-black text-blue-800 flex items-center justify-center mb-2">
           <Sparkles className="w-8 h-8 mr-2 text-blue-600" /> Welcome to IZAKAYA!
         </h1>
@@ -41,13 +41,13 @@ const WelcomeView = () => {
       {/* Cultural Graphics / Illustrations Section - Placeholder */}
       <div className="flex justify-around items-center w-full max-w-md p-4 bg-blue-300">
         {/* Placeholder for Japanese Fan */}
-        <div className="w-16 h-16 bg-blue-300 rounded-full flex items-center justify-center text-white text-3xl font-bold opacity-75">
+        <div className="w-20 h-20 bg-blue-300 rounded-full flex items-center justify-center text-white text-3xl font-bold opacity-75">
         <img src={logo1} alt="logo1" className="w-20 h-20 mr-2 object-contain"/>
         </div>
         {/* Placeholder for Cherry Blossom */}
         <img src={logo2} alt="logo2" className="w-20 h-20 mr-2 object-contain"/>
         {/* Placeholder for Torii Gate */}
-        <div className="w-16 h-16 bg-blue-300 rounded flex items-center justify-center text-white text-2xl font-bold opacity-75">
+        <div className="w-20 h-20 bg-blue-300 rounded flex items-center justify-center text-white text-2xl font-bold opacity-75">
         <img src={logo3} alt="logo3" className="w-20 h-20 mr-2 object-contain"/>
         </div>
       </div>
