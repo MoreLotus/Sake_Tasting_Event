@@ -33,7 +33,7 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
 
             <Card className="grid grid-cols-2 gap-4 text-center">
                 <div>
-                    <p className="text-4xl font-extrabold text-blue-600">{tastedSakes.length}</p>
+                    <p className="text-4xl font-extrabold text-cyan-300">{tastedSakes.length}</p>
                     <p className="text-sm font-medium text-gray-500">Sakes Stamped</p>
                     <p className="text-xs text-gray-400">/ {totalSakes} Total</p>
                 </div>
@@ -62,7 +62,7 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
                                         <p className="text-xs text-gray-500">{sake.brewery}</p>
                                     </div>
                                     <div className="flex items-center space-x-1 flex-shrink-0">
-                                        <span className="font-bold text-lg text-blue-400 mr-1">{sake.ranking.rating.toFixed(0)}</span>
+                                        <span className="font-bold text-lg text-cyan-300 mr-1">{sake.ranking.rating.toFixed(0)}</span>
                                         <StarRating rating={sake.ranking.rating} size={16} onRate={() => {}} />
                                     </div>
                                 </div>
