@@ -6,6 +6,7 @@ import { SAKE_DATA, VIEWS } from './config/constants';
 import useFirebase from './hooks/useFirebase';
 import useSakeRankings from './hooks/useSakeRankings';
 import { Loader, ErrorMessage } from './components/Utility';
+import logo from './custom_image/HSM_Yellow_Emblem.png';
 
 // Import Views
 import WelcomeView from './views/WelcomeView';
@@ -75,8 +76,8 @@ const App = () => {
             <header className="bg-white flex-shrink-0 shadow-md z-10">
                 <div className="p-4 flex justify-between items-center border-b border-red-100">
                     <h1 className="text-2xl font-black text-red-700 flex items-center">
-                        <Wine className="w-6 h-6 mr-2 fill-red-700" />
-                        Sake Passport
+                        <img src={logo} alt="Izakaya logo" className="w-8 h-8 mr-2 object-contain"/>
+                        IZAKAYA
                     </h1>
                     {/*<div className="flex items-center space-x-2 text-sm text-gray-500">
                         {{userId && <UserCircle className="w-5 h-5" />}}
