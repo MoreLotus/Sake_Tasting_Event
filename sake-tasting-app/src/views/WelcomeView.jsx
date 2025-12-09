@@ -8,11 +8,11 @@ const WelcomeView = () => {
   return (
     <div className="p-4 space-y-6 flex flex-col items-center text-center">
       {/* Event Header Card */}
-      <Card className="bg-red-50 border-red-200 shadow-lg w-full max-w-md">
-        <h1 className="text-3xl font-black text-red-800 flex items-center justify-center mb-2">
-          <Sparkles className="w-8 h-8 mr-2 text-red-600" /> Welcome to IZAKAYA!
+      <Card className="bg-yellow-50 border-yellow-200 shadow-lg w-full max-w-md">
+        <h1 className="text-3xl font-black text-blue-800 flex items-center justify-center mb-2">
+          <Sparkles className="w-8 h-8 mr-2 text-blue-600" /> Welcome to IZAKAYA!
         </h1>
-        <p className="text-lg text-red-700 font-semibold">
+        <p className="text-lg text-blue-700 font-semibold">
           An Evening of Sake & Culinary Delights
         </p>
       </Card>
@@ -36,7 +36,7 @@ const WelcomeView = () => {
       {/* Cultural Graphics / Illustrations Section - Placeholder */}
       <div className="flex justify-around items-center w-full max-w-md p-4 bg-gradient-to-r from-red-100 to-orange-100 rounded-lg shadow-inner">
         {/* Placeholder for Japanese Fan */}
-        <div className="w-16 h-16 bg-red-300 rounded-full flex items-center justify-center text-white text-3xl font-bold opacity-75">
+        <div className="w-16 h-16 bg-yellow-300 rounded-full flex items-center justify-center text-white text-3xl font-bold opacity-75">
           扇
         </div>
         {/* Placeholder for Cherry Blossom */}

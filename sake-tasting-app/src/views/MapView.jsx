@@ -9,19 +9,19 @@ const MapView = ({ sakeData, rankings }) => {
 
     return (
         <div className="p-4 space-y-6">
-            <Card className="bg-red-50">
-                <h2 className="text-2xl font-extrabold text-red-800 mb-2 flex items-center">
+            <Card className="bg-yellow-50">
+                <h2 className="text-2xl font-extrabold text-blue-800 mb-2 flex items-center">
                     <Map className="w-6 h-6 mr-2" />
                     Tasting Hall Map
                 </h2>
-                <p className="text-red-700">Find your way and collect those stamps! Progress: {Math.round(progressPercent)}%</p>
+                <p className="text-blue-700">Find your way and collect those stamps! Progress: {Math.round(progressPercent)}%</p>
                 <div className="mt-4 h-4 bg-gray-200 rounded-full overflow-hidden">
                     <div
-                        className="h-full bg-red-500 transition-all duration-500"
+                        className="h-full bg-yellow-500 transition-all duration-500"
                         style={{ width: `${progressPercent}%` }}
                     ></div>
                 </div>
-                <p className="text-sm font-semibold mt-1 text-red-600">
+                <p className="text-sm font-semibold mt-1 text-blue-600">
                     {tastedCount} of {totalSakes} Sakes Stamped
                 </p>
             </Card>
@@ -38,7 +38,7 @@ const MapView = ({ sakeData, rankings }) => {
                         // Place markers based on their location index
                         const xPos = (index % 3) * 30 + 15;
                         const yPos = Math.floor(index / 3) * 35 + 15;
-                        const colorClass = hasTasted ? 'bg-green-600 ring-green-300' : 'bg-red-500 ring-red-300';
+                        const colorClass = hasTasted ? 'bg-green-600 ring-green-300' : 'bg-yellow-500 ring-blue-300';
 
                         return (
                             <div

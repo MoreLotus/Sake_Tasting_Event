@@ -74,8 +74,8 @@ const App = () => {
             
             {/* Header (Fixed Top) */}
             <header className="bg-white flex-shrink-0 shadow-md z-10">
-                <div className="p-4 flex justify-between items-center border-b border-red-100">
-                    <h1 className="text-2xl font-black text-red-700 flex items-center">
+                <div className="p-4 flex justify-between items-center border-b border-yellow-100">
+                    <h1 className="text-2xl font-black text-blue-700 flex items-center">
                         <img src={logo} alt="Izakaya logo" className="w-8 h-8 mr-2 object-contain"/>
                         IZAKAYA
                     </h1>
@@ -122,7 +122,7 @@ const NavItem = ({ view, currentView, setCurrentView }) => {
         <button
             onClick={() => setCurrentView(view)}
             className={`flex flex-col items-center justify-center p-3 sm:p-4 w-1/3 transition-colors duration-200 ${
-                isActive ? 'text-red-700 bg-red-50' : 'text-gray-500 hover:text-red-500'
+                isActive ? 'text-blue-700 bg-red-50' : 'text-gray-500 hover:text-blue-500'
             }`}
         >
             <IconComponent className="w-6 h-6 mb-1" />
