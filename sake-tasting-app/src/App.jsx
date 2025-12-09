@@ -1,5 +1,5 @@
 import React, { useState, Suspense } from 'react';
-import { Wine, List, Map, Book, UserCircle } from 'lucide-react';
+import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry } from 'lucide-react';
 
 // Import local modularized files
 import { SAKE_DATA, VIEWS } from './config/constants';
@@ -8,13 +8,14 @@ import useSakeRankings from './hooks/useSakeRankings';
 import { Loader, ErrorMessage } from './components/Utility';
 
 // Import Views
-import MapView from './views/MapView';
+import WelcomeView from './views/WelcomeView';
+//import MapView from './views/MapView';
 import SakesView from './views/SakesView';
 import MyRankingsView from './views/MyRankingsView';
 
 
 const App = () => {
-    const [currentView, setCurrentView] = useState(VIEWS.SAKES);
+    const [currentView, setCurrentView] = useState(VIEWS.WELCOME);
     
     // 🚀 FIX 1: Include 'analytics' in destructuring from useFirebase
     const { db, userId, isAuthReady, analytics } = useFirebase();
@@ -41,16 +42,18 @@ const App = () => {
                         // by passing the 'loading' prop down.
                         
                         switch (currentView) {
-                            case VIEWS.MAP:
+                            //case VIEWS.MAP:
                                 // Passing 'loading' down to the view
-                                return <MapView sakeData={SAKE_DATA} rankings={rankings} loading={loading} />;
+                            //    return <MapView sakeData={SAKE_DATA} rankings={rankings} loading={loading} />;
                             case VIEWS.SAKES:
                                 // Passing 'loading' down to the view
                                 return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} loading={loading} />;
                             case VIEWS.PASSPORT:
                                 // Passing 'loading' down to the view
                                 return <MyRankingsView sakeData={SAKE_DATA} rankings={rankings} userId={userId} loading={loading} />;
-                            default:
+                            case VIEWS.WELCOME:
+                                return <WelcomeView/>;
+                                default:
                                 return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} loading={loading} />;
                         }
                     })()}
@@ -108,7 +111,8 @@ const NavItem = ({ view, currentView, setCurrentView }) => {
     const isActive = view === currentView;
     const icon = {
         [VIEWS.SAKES]: List,
-        [VIEWS.MAP]: Map,
+        //[VIEWS.MAP]: Map,
+        [VIEWS.WELCOME]: Sparkles,
         [VIEWS.PASSPORT]: Book, 
     }[view];
     const IconComponent = icon || List;

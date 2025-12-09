@@ -29,8 +29,13 @@ export const SAKE_DATA = [
     { id: 'sake-11', name: 'Valley ', brewery: 'Wren House', type: 'Lager', description: 'GABF 2019 Silver, CBA Silver Winner - American Lager.', location: 'Booth F1', abv: '4.6%', flavor: 'Crisp, clean, honey and spice.', pairs: 'Spicy Food'},
 ]
 
+export const VENDOR_DATA = [
+    {}
+]
+
 export const VIEWS = {
-    MAP: 'Map',
+    //MAP: 'Map',
+    WELCOME: 'Welcome',
     SAKES: 'Sakes',
     PASSPORT: 'Passport',
 };
