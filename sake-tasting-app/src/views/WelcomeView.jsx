@@ -34,7 +34,7 @@ const WelcomeView = () => {
       </Card>
 
       {/* Cultural Graphics / Illustrations Section - Placeholder */}
-      <div className="flex justify-around items-center w-full max-w-md p-4 bg-gradient-to-r from-red-100 to-orange-100 rounded-lg shadow-inner">
+      <div className="flex justify-around items-center w-full max-w-md p-4 bg-yellow-100">
         {/* Placeholder for Japanese Fan */}
         <div className="w-16 h-16 bg-yellow-300 rounded-full flex items-center justify-center text-white text-3xl font-bold opacity-75">
           扇
