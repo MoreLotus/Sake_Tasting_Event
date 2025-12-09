@@ -40,9 +40,9 @@ const WelcomeView = () => {
           扇
         </div>
         {/* Placeholder for Cherry Blossom */}
-        <Cherry className="w-12 h-12 text-pink-500 animate-pulse" />
+        <Cherry className="w-12 h-12 text-blue-500 animate-pulse" />
         {/* Placeholder for Torii Gate */}
-        <div className="w-16 h-16 bg-orange-400 rounded flex items-center justify-center text-white text-2xl font-bold opacity-75">
+        <div className="w-16 h-16 bg-yellow-300 rounded flex items-center justify-center text-white text-2xl font-bold opacity-75">
           ⛩️
         </div>
       </div>

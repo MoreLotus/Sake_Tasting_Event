@@ -38,7 +38,7 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
                     <p className="text-xs text-gray-400">/ {totalSakes} Total</p>
                 </div>
                 <div>
-                    <p className="text-4xl font-extrabold text-blue-300 flex items-center justify-center">
+                    <p className="text-4xl font-extrabold text-cyan-300 flex items-center justify-center">
                         {averageRating} <Star className="w-5 h-5 ml-2 fill-yellow-400 text-yellow-400" />
                     </p>
                     <p className="text-sm font-medium text-gray-500">Average Rating</p>
@@ -62,7 +62,7 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
                                         <p className="text-xs text-gray-500">{sake.brewery}</p>
                                     </div>
                                     <div className="flex items-center space-x-1 flex-shrink-0">
-                                        <span className="font-bold text-lg text-blue-600 mr-1">{sake.ranking.rating.toFixed(0)}</span>
+                                        <span className="font-bold text-lg text-blue-400 mr-1">{sake.ranking.rating.toFixed(0)}</span>
                                         <StarRating rating={sake.ranking.rating} size={16} onRate={() => {}} />
                                     </div>
                                 </div>
