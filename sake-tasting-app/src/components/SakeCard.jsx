@@ -41,7 +41,7 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking }) => {
             <div className="flex-grow space-y-1 w-full">
                 <h3 className="text-xl font-extrabold text-gray-900">{sake.name}</h3>
                 <p className="text-sm text-gray-600 font-medium">{sake.brewery} ({sake.abv})</p>
-                <div className="flex flex-wrap items-center space-x-2 text-sm text-blue-400">
+                <div className="flex flex-wrap items-center space-x-2 text-sm text-blue-500">
                     <Wine className="w-4 h-4" />
                     <span className="font-semibold">{sake.type}</span>
                     <span className="font-light text-gray-400 hidden sm:inline">|</span>

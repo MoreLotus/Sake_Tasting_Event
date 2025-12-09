@@ -12,7 +12,7 @@ export const StarRating = ({ rating, size = 20, onRate }) => {
                 key={i}
                 size={size}
                 className={`cursor-pointer transition-colors duration-200 ${
-                    isFilled ? 'text-cyan-300 fill-yellow-400' : 'text-gray-300'
+                    isFilled ? 'text-cyan-400 fill-yellow-400' : 'text-gray-300'
                 }`}
                 onClick={() => onRate(i)}
             />
