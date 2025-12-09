@@ -21,7 +21,7 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
 
     return (
         <div className="p-4 space-y-6">
-            <Card className="bg-yellow-50 border-blue-200">
+            <Card className="bg-yellow-100 border-blue-200">
                 <h2 className="text-2xl font-extrabold text-blue-800 mb-2 flex items-center">
                     <QrCode className="w-6 h-6 mr-2" />
                     My Tasting Passport

@@ -9,7 +9,7 @@ const MapView = ({ sakeData, rankings }) => {
 
     return (
         <div className="p-4 space-y-6">
-            <Card className="bg-yellow-50">
+            <Card className="bg-yellow-100">
                 <h2 className="text-2xl font-extrabold text-blue-800 mb-2 flex items-center">
                     <Map className="w-6 h-6 mr-2" />
                     Tasting Hall Map
