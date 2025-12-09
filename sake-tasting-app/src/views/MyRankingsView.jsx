@@ -38,7 +38,7 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
                     <p className="text-xs text-gray-400">/ {totalSakes} Total</p>
                 </div>
                 <div>
-                    <p className="text-4xl font-extrabold text-blue-600 flex items-center justify-center">
+                    <p className="text-4xl font-extrabold text-blue-300 flex items-center justify-center">
                         {averageRating} <Star className="w-5 h-5 ml-2 fill-yellow-400 text-yellow-400" />
                     </p>
                     <p className="text-sm font-medium text-gray-500">Average Rating</p>

@@ -122,7 +122,7 @@ const NavItem = ({ view, currentView, setCurrentView }) => {
         <button
             onClick={() => setCurrentView(view)}
             className={`flex flex-col items-center justify-center p-3 sm:p-4 w-1/3 transition-colors duration-200 ${
-                isActive ? 'text-blue-700 bg-red-50' : 'text-gray-500 hover:text-blue-500'
+                isActive ? 'text-blue-700 bg-blue-50' : 'text-gray-500 hover:text-blue-500'
             }`}
         >
             <IconComponent className="w-6 h-6 mb-1" />
