@@ -1,5 +1,5 @@
 import React, { useState, Suspense } from 'react';
-import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry } from 'lucide-react';
+import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Utensils, Instagram} from 'lucide-react';
 
 // Import local modularized files
 import { SAKE_DATA, VIEWS, VENDOR_DATA } from './config/constants';
