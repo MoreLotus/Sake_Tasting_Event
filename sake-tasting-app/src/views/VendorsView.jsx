@@ -1,19 +1,19 @@
 
 import React from 'react';
 import { Card } from '../components/Utility';
-import { Utensils, Instagram } from 'lucide-react'; 
+import { Tent, Instagram } from 'lucide-react'; 
 // NOTE: VENDOR_DATA is imported by App.jsx and passed down as a prop.
 
 const VendorsView = ({ vendorData }) => {
   return (
     <div className="p-4 space-y-4">
-      
+        
       {/* Informational Header Card */}
       <Card className="bg-blue-50 border-blue-200 shadow-sm w-full">
         <h2 className="text-xl font-bold text-blue-800 flex items-center">
-          <Utensils className="w-6 h-6 mr-2" /> Food Vendors
+          <Tent className="w-6 h-6 mr-2" /> Vendors
         </h2>
-        <p className="text-sm text-blue-700">Find the perfect food pairing for your sake! Check their Instagram for daily specials.</p>
+        <p className="text-sm text-blue-700">Below is a list of all the food trucks and vendors here. Make sure to give them a visit!</p>
       </Card>
 
       {/* List of Vendors */}

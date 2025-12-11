@@ -1,5 +1,5 @@
 import React, { useState, Suspense } from 'react';
-import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Utensils, Instagram} from 'lucide-react';
+import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Tent, Instagram} from 'lucide-react';
 
 // Import local modularized files
 import { SAKE_DATA, VIEWS, VENDOR_DATA } from './config/constants';
@@ -117,7 +117,7 @@ const NavItem = ({ view, currentView, setCurrentView }) => {
         [VIEWS.SAKES]: List,
         //[VIEWS.MAP]: Map,
         [VIEWS.WELCOME]: Sparkles,
-        [VIEWS.VENDORS]: Utensils,
+        [VIEWS.VENDORS]: Tent,
         [VIEWS.PASSPORT]: Book, 
     }[view];
     const IconComponent = icon || List;

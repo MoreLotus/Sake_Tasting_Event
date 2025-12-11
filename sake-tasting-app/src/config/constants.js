@@ -30,7 +30,7 @@ export const SAKE_DATA = [
 ]
 
 export const VENDOR_DATA = [
-    {id: 'v1', name: 'Hot Bamboo', isntagram: 'hotbamboo', specialty: 'Food Stand'},
+    {id: 'v1', name: 'Hot Bamboo', instagram: 'hotbamboo', specialty: 'Food Stand'},
     {id: 'v2', name: 'Let\'s Toast', instagram: 'letstoastofficial', specialty: 'Gourmet Korean BBQ Sandwiches'},
     {id: 'v3', name: 'ThaiBBQ Sticks', instagram: 'thaistickphx', specialty: 'Thai Skewers'},
     {id: 'v4', name: 'Kakigori', instagram: 'kakigoriaddict', specialty: 'Shaved Ice'},
@@ -53,5 +53,5 @@ export const VIEWS = {
     WELCOME: 'Welcome',
     SAKES: 'Sakes',
     PASSPORT: 'Passport',
-    VENDORS: 'Food'
+    VENDORS: 'Vendors'
 };
