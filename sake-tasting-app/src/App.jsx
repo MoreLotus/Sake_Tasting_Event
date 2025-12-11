@@ -2,7 +2,7 @@ import React, { useState, Suspense } from 'react';
 import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry } from 'lucide-react';
 
 // Import local modularized files
-import { SAKE_DATA, VIEWS } from './config/constants';
+import { SAKE_DATA, VIEWS, VENDOR_DATA } from './config/constants';
 import useFirebase from './hooks/useFirebase';
 import useSakeRankings from './hooks/useSakeRankings';
 import { Loader, ErrorMessage } from './components/Utility';
@@ -12,6 +12,7 @@ import logo from './custom_image/HSM_Yellow_Emblem.png';
 import WelcomeView from './views/WelcomeView';
 //import MapView from './views/MapView';
 import SakesView from './views/SakesView';
+import VendorsView from './views/VendorsView';
 import MyRankingsView from './views/MyRankingsView';
 
 
@@ -52,6 +53,8 @@ const App = () => {
                             case VIEWS.PASSPORT:
                                 // Passing 'loading' down to the view
                                 return <MyRankingsView sakeData={SAKE_DATA} rankings={rankings} userId={userId} loading={loading} />;
+                            case VIEWS.VENDORS:
+                                return <VendorsView vendorData={VENDOR_DATA} />;
                             case VIEWS.WELCOME:
                                 return <WelcomeView/>;
                                 default:
@@ -114,6 +117,7 @@ const NavItem = ({ view, currentView, setCurrentView }) => {
         [VIEWS.SAKES]: List,
         //[VIEWS.MAP]: Map,
         [VIEWS.WELCOME]: Sparkles,
+        [VIEWS.VENDORS]: Utensils,
         [VIEWS.PASSPORT]: Book, 
     }[view];
     const IconComponent = icon || List;

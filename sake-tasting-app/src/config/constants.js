@@ -30,7 +30,22 @@ export const SAKE_DATA = [
 ]
 
 export const VENDOR_DATA = [
-    {}
+    {id: 'v1', name: 'Hot Bamboo', isntagram: 'hotbamboo', specialty: 'Food Stand'},
+    {id: 'v2', name: 'Let\'s Toast', instagram: 'letstoastofficial', specialty: 'Gourmet Korean BBQ Sandwiches'},
+    {id: 'v3', name: 'ThaiBBQ Sticks', instagram: 'thaistickphx', specialty: 'Thai Skewers'},
+    {id: 'v4', name: 'Kakigori', instagram: 'kakigoriaddict', specialty: 'Shaved Ice'},
+    {id: 'v5', name: 'Twisted Munchies', instagram: 'twisted_munchies_az', specialty: 'Birria Pho & Birria Bo Kho Tacos'},
+    {id: 'v6', name: 'Peko Eats', instagram: 'eatpeko.az', specialty: 'Food Truck'},
+    {id: 'v7', name: 'Phenomenal Street Eats', instagram: 'phonemenalstreeteats', specialty: 'Lao-Thai Craft BBQ Food Truck'},
+    {id: 'v8', name: 'GatchaX2', instagram: 'gacha.x2', specialty: 'Merchandise'},
+    {id: 'v9', name: 'Sloppy Brush', instagram: 'sloppy_brush', specialty: 'Local Artist'},
+    {id: 'v10', name: 'Mizumu', instagram: 'mizumori.shop', specialty: 'Shopping & Retail'},
+    {id: 'v11', name: 'Desert Grace Beauty', instagram: 'desertgracestudio', specialty: 'Tatto & Piercing Shop'},
+    {id: 'v12', name: 'Kinkan Gifts + Stationary', instagram: 'kinkangifts', specialty: 'Shopping & Retail'},
+    {id: 'v13', name: 'Smackarons', instagram: 'dawnsmackarons', specialty: 'Macarons'},
+    {id: 'v14', name: 'Cutesew Luna', instagram: 'cutesewluna', specialty: 'Local Artist'},
+    {id: 'v15', name: 'Shibabitz', instagram: 'shibabitz', specialty: 'Local Artist'},
+    {id: 'v16', name: 'Rugalia', instagram: 'rugaliadesigns', specialty: 'Local Artist'},
 ]
 
 export const VIEWS = {
@@ -38,4 +53,5 @@ export const VIEWS = {
     WELCOME: 'Welcome',
     SAKES: 'Sakes',
     PASSPORT: 'Passport',
+    VENDOR: 'Food'
 };
