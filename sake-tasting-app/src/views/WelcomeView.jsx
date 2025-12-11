@@ -5,7 +5,7 @@ import { Card } from '../components/Utility';
 import { Sparkles, Cherry, Wine } from 'lucide-react'; // Example icons for cultural flair
 import logo1 from '../custom_image/HK_HSM.png';
 import logo2 from '../custom_image/HSM_Red_Emblem.png';
-import logo3 from '../custom_image/arizona_sake.png';
+import logo3 from '../custom_image/arizona_sake.jpg';
 
 
 
