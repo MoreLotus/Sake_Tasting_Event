@@ -53,5 +53,5 @@ export const VIEWS = {
     WELCOME: 'Welcome',
     SAKES: 'Sakes',
     PASSPORT: 'Passport',
-    VENDOR: 'Food'
+    VENDORS: 'Food'
 };
