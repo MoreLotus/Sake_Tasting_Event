@@ -76,11 +76,11 @@ const App = () => {
             `}</style>
             
             {/* Header (Fixed Top) */}
-            <header className="bg-white flex-shrink-0 shadow-md z-10">
-                <div className="p-4 flex justify-between items-center border-b border-yellow-100">
-                    <h1 className="text-2xl font-black text-blue-700 flex items-center">
+            <header className="bg-red-700 flex-shrink-0 shadow-md z-10">
+                <div className="p-4 flex justify-between items-center border-b border-red-700">
+                    <h1 className="text-2xl font-black text-white flex items-center">
                         <img src={logo} alt="Izakaya logo" className="w-8 h-8 mr-2 object-contain"/>
-                        IZAKAYA
+                        HELLO IZAKAYA
                     </h1>
                     {/*<div className="flex items-center space-x-2 text-sm text-gray-500">
                         {{userId && <UserCircle className="w-5 h-5" />}}

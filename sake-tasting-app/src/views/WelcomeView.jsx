@@ -1,62 +1,104 @@
-// --- Create src/views/WelcomeView.jsx ---
+// --- src/views/WelcomeView.jsx ---
 
 import React from 'react';
 import { Card } from '../components/Utility';
-import { Sparkles, Cherry, Wine } from 'lucide-react'; // Example icons for cultural flair
+// 💡 Added User and UserRound icons for the input field
+import { Sparkles, Cherry, Wine, User, UserRound } from 'lucide-react'; 
 import logo1 from '../custom_image/HK_HSM.png';
 import logo2 from '../custom_image/HSM_Red_Emblem.png';
 import logo3 from '../custom_image/arizona_sake.jpg';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 
 
 const WelcomeView = () => {
-  return (
-    <div className="p-4 space-y-6 flex flex-col items-center text-center">
-      {/* Event Header Card */}
-      <Card className="bg-yellow-100 border-yellow-300 shadow-lg w-full max-w-md">
-        <h1 className="text-3xl font-black text-blue-800 flex items-center justify-center mb-2">
-          <Sparkles className="w-8 h-8 mr-2 text-blue-600" /> Welcome to IZAKAYA!
-        </h1>
-        <p className="text-lg text-blue-700 font-semibold">
-          An Evening of Sake & Culinary Delights
-        </p>
-      </Card>
 
-      {/* App Explanation Card */}
-      <Card className="bg-white border-gray-200 shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold text-gray-800 flex items-center justify-center mb-3">
-          Your Digital Sake Passport <Wine className="w-6 h-6 ml-2" />
-        </h2>
-        <p className="text-md text-gray-700 mb-4">
-          This app is your companion for the evening! It's designed to make your sake tasting adventure even more enjoyable.
-        </p>
-        <p className="text-md text-gray-700">
-          **Explore, Taste, and Track!** Use this app to discover all the amazing sakes available, keep notes on your favorites, and mark off the ones you've tried.
-        </p>
-        <p className="text-sm text-gray-500 mt-4 italic">
-          Let's embark on a delicious journey through the world of sake!
-        </p>
-      </Card>
+  // The key 'passportName' is used in local storage
+  const [userName, setUserName] = useLocalStorage('passportName', ''); 
 
-      {/* Cultural Graphics / Illustrations Section - Placeholder */}
-      <div className="flex justify-around items-center w-full max-w-md p-4 bg-blue-300">
-        {/* Placeholder for Japanese Fan */}
-        <div className="w-20 h-20 bg-blue-300 rounded-full flex items-center justify-center text-white text-3xl font-bold opacity-75">
-        <img src={logo1} alt="logo1" className="w-20 h-20 mr-2 object-contain"/>
-        </div>
-        {/* Placeholder for Cherry Blossom */}
-        <img src={logo2} alt="logo2" className="w-20 h-20 mr-2 object-contain"/>
-        {/* Placeholder for Torii Gate */}
-        <div className="w-20 h-20 bg-blue-300 rounded flex items-center justify-center text-white text-2xl font-bold opacity-75">
-        <img src={logo3} alt="logo3" className="w-20 h-20 mr-2 object-contain"/>
-        </div>
-      </div>
+  // Handler for input changes
+  const handleNameChange = (event) => {
+    setUserName(event.target.value);
+  };
+  
+  // Determine if the user has entered a name (uses a placeholder if empty)
+  const displayUserName = userName || 'Izakaya Guest';
 
-      {/* Call to Action or Footer */}
-      <p className="text-sm text-gray-600 mt-4">
-        Don't forget to visit our amazing Food Vendors!
-      </p>
-    </div>
-  );
+  return (
+    <div className="p-4 space-y-6 flex flex-col items-center text-center">
+      
+      {/* Event Header Card (Yellow/Blue Theme) */}
+      <Card className="bg-yellow-100 border-yellow-300 shadow-lg w-full max-w-md">
+        <h1 className="text-3xl font-black text-blue-800 flex items-center justify-center mb-2">
+          <Sparkles className="w-8 h-8 mr-2 text-blue-600" /> Welcome to IZAKAYA!
+        </h1>
+        <p className="text-lg text-blue-700 font-semibold">
+          An Evening of Sake & Culinary Delights
+        </p>
+      </Card>
+
+      {/* 🚀 NEW: NAME INPUT & PERSONALIZED GREETING CARD */}
+      <Card className="bg-white border-blue-300 shadow-md w-full max-w-md p-4">
+        <h2 className="text-xl font-bold text-gray-800 flex items-center justify-center mb-3">
+          <UserRound className="w-6 h-6 mr-2 text-blue-600" /> 
+          Hello, this passport belongs to:
+        </h2>
+        
+        {/* Display the Name (large and visible) */}
+        <p className="text-3xl font-extrabold text-blue-800 truncate mb-4 px-2">
+          {displayUserName}
+        </p>
+
+        {/* Input Field */}
+        <div className="w-full relative">
+          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Enter your name here"
+            value={userName}
+            onChange={handleNameChange}
+            className="w-full pl-10 pr-3 py-2 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base text-gray-800 font-medium"
+          />
+        </div>
+      </Card>
+
+      {/* App Explanation Card */}
+      <Card className="bg-white border-gray-200 shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-bold text-gray-800 flex items-center justify-center mb-3">
+          Your Digital Sake Passport <Wine className="w-6 h-6 ml-2" />
+        </h2>
+        <p className="text-md text-gray-700 mb-4">
+          This app is your companion for the evening! It's designed to make your sake tasting adventure even more enjoyable.
+        </p>
+        <p className="text-md text-gray-700">
+          **Explore, Taste, and Track!** Use this app to discover all the amazing sakes available, keep notes on your favorites, and mark off the ones you've tried.
+        </p>
+        <p className="text-sm text-gray-500 mt-4 italic">
+          Let's embark on a delicious journey through the world of sake!
+        </p>
+      </Card>
+
+      {/* Cultural Graphics / Illustrations Section - Fixed Sizing and Flex */}
+      <div className="flex justify-around items-center w-full max-w-md p-4 bg-blue-300">
+        {/* Logo 1 Container */}
+        <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
+          <img src={logo1} alt="logo1" className="w-full h-full object-contain"/>
+        </div>
+        {/* Logo 2 Container */}
+        <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
+          <img src={logo2} alt="logo2" className="w-full h-full object-contain"/>
+        </div>
+        {/* Logo 3 Container */}
+        <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
+          <img src={logo3} alt="logo3" className="w-full h-full object-contain"/>
+        </div>
+      </div>
+
+      {/* Call to Action or Footer */}
+      <p className="text-sm text-gray-600 mt-4">
+        Don't forget to visit our amazing Food Vendors!
+      </p>
+    </div>
+  );
 };
 export default WelcomeView;
