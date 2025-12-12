@@ -27,10 +27,10 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
 
             {/* 🚀 NEW: Custom Image Banner */}
             <Card className="bg-yellow-100 border-yellow-100">
-                <h4 className="text-3x1 font-extrabold text-blue-900 text-center">
+                <h4 className="text-3xl font-extrabold text-blue-900 text-center">
                     MAP
                 </h4>
-                <p className="text-md text-blue-950 text-center">
+                <p className="text-md text-blue-800 text-center">
                     Zoom in to locate stations throughout the park.
                     Don't forget to check out the Limited Omaksae Flights and Full Bar!
                 </p>

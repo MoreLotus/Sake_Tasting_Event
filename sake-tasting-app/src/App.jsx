@@ -79,7 +79,7 @@ const App = () => {
             <header className="bg-red-700 flex-shrink-0 shadow-md z-10">
                 <div className="p-4 flex justify-center items-center border-b border-red-700">
                     <h1 className="text-4xl font-black text-white flex items-center">
-                        <img src={logo} alt="Izakaya logo" className="w-8 h-8 mr-2 object-contain"/>
+                        <img src={logo} alt="Izakaya logo" className="w-10 h-10 mr-2 object-contain"/>
                         HELLO IZAKAYA
                     </h1>
                     {/*<div className="flex items-center space-x-2 text-sm text-gray-500">
