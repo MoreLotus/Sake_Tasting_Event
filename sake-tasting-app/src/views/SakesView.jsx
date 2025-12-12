@@ -7,7 +7,7 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
     return (
         <div className="p-4 space-y-4">
             <Card className="bg-yellow-100 border-yellow-100">
-                <h2 className="text-2xl font-extrabold text-blue-800 mb-2 flex items-center">
+                <h2 className="text-2xl justify-center font-extrabold text-blue-800 mb-2 flex items-center">
                     乾杯<br />
                     Tasting List & Stamp Collection
                 </h2>

@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import { QrCode, Star } from 'lucide-react';
 import { Card, StarRating } from '../components/Utility';
+import stamp from './custom_image/hello_kitty.png';
+
 
 const MyRankingsView = ({ sakeData, rankings, userId }) => {
     const tastedSakes = useMemo(() => {
@@ -21,11 +23,11 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
 
     return (
         <div className="p-4 space-y-6">
-            <Card className="bg-yellow-100 border-blue-200">
-                <h2 className="text-2xl font-extrabold text-blue-800 mb-2 flex items-center">
-                    <QrCode className="w-6 h-6 mr-2" />
-                    My Tasting Passport
+            <Card className="bg-yellow-100 border-yellow-100">
+                <h2 className="text-3xl font-extrabold text-blue-800 mb-2 flex items-center justify-center">
+                    SAMPLE + STAMP
                 </h2>
+                <p className="txt-md text-blue-700">Rate tasting with stars, collect a stamp, and add your tasting notes! </p>
                 {/*<p className="text-blue-700 font-mono text-xs overflow-hidden truncate">
                     User ID: {userId || 'Authenticating...'}
                 </p>*/}
@@ -33,7 +35,7 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
 
             <Card className="grid grid-cols-2 gap-4 text-center">
                 <div>
-                    <p className="text-4xl font-extrabold text-cyan-400">{tastedSakes.length}</p>
+                    <p className="text-4xl font-extrabold text-cyan-400">{tastedSakes.length} <img src={stamp} alt="HelloKitty Stamp" className="w-8 h-8 mr-2 object-contain"/></p>
                     <p className="text-sm font-medium text-gray-500">Sakes Stamped</p>
                     <p className="text-xs text-gray-400">/ {totalSakes} Total</p>
                 </div>

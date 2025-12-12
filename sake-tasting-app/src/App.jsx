@@ -78,7 +78,7 @@ const App = () => {
             {/* Header (Fixed Top) */}
             <header className="bg-red-700 flex-shrink-0 shadow-md z-10">
                 <div className="p-4 flex justify-center items-center border-b border-red-700">
-                    <h1 className="text-2xl font-black text-white flex items-center">
+                    <h1 className="text-4xl font-black text-white flex items-center">
                         <img src={logo} alt="Izakaya logo" className="w-8 h-8 mr-2 object-contain"/>
                         HELLO IZAKAYA
                     </h1>
