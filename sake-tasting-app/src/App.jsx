@@ -1,6 +1,6 @@
 // --- src/App.jsx ---
 
-import React, { useState, Suspense, useEffect } from 'react'; // 💡 IMPORTED useEffect
+import React, { useState, Suspense, useEffect } from 'react';
 // 💡 Included Map, List, Tent, Book for the four nav items
 import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Tent, X } from 'lucide-react'; 
 
@@ -8,7 +8,7 @@ import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Tent, X } from 'lu
 import { SAKE_DATA, VIEWS, VENDOR_DATA } from './config/constants';
 import useFirebase from './hooks/useFirebase';
 import useSakeRankings from './hooks/useSakeRankings';
-import useLocalStorage from './hooks/useLocalStorage';
+// import useLocalStorage from './hooks/useLocalStorage'; // ❌ REMOVED: No longer needed for modal state
 import { Loader, ErrorMessage } from './components/Utility';
 import Modal from './components/Modal';
 import logo from './custom_image/HSM_Yellow_Emblem.png';
@@ -25,26 +25,18 @@ const App = () => {
     
     const [currentView, setCurrentView] = useState(VIEWS.MAP); 
     
-    // 🚀 MODAL STATE MANAGEMENT
-    // 1. Tracks if the user has seen the welcome modal before (read from localStorage)
-    const [hasSeenWelcome, setHasSeenWelcome] = useLocalStorage('hasSeenWelcome', false);
+    // 🚀 MODAL STATE MANAGEMENT FIX: 
+    // Set to true by default, and remove all checks/saving logic.
+    // 1. Removed hasSeenWelcome state
+    // 2. showWelcomeModal is now controlled only by the user closing it
+    const [showWelcomeModal, setShowWelcomeModal] = useState(true); 
     
-    // 2. Controls the visibility state of the modal. Set initial state to null/false
-    //    until we confirm the value from localStorage.
-    const [showWelcomeModal, setShowWelcomeModal] = useState(false); 
+    // ❌ REMOVED useEffect: No longer needed to check local storage.
     
-    // 💡 FIX: Use useEffect to set the modal visibility AFTER localStorage is read.
-    useEffect(() => {
-        // If localStorage says the user has NOT seen the welcome, show the modal.
-        if (!hasSeenWelcome) {
-            setShowWelcomeModal(true);
-        }
-    }, [hasSeenWelcome]); // Re-run only if the hasSeenWelcome value changes.
-    
-    // Function to close the modal and mark it as seen
+    // Function to close the modal (but it will pop up on next reload)
     const handleCloseWelcome = () => {
         setShowWelcomeModal(false);
-        setHasSeenWelcome(true);
+        // ❌ REMOVED: setHasSeenWelcome(true);
     };
 
     const { db, userId, isAuthReady, analytics } = useFirebase();
@@ -145,7 +137,7 @@ const App = () => {
                 </div>
             </nav>
             
-            {/* WELCOME MODAL (Renders only once, on load) */}
+            {/* WELCOME MODAL (Will now show on every load) */}
             {showWelcomeModal && (
                 <Modal onClose={handleCloseWelcome}>
                     <WelcomeView />
