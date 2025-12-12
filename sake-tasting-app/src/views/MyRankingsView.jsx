@@ -27,17 +27,17 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
                 <h2 className="text-3xl font-extrabold text-blue-900 mb-2 flex items-center justify-center">
                     SAMPLE + STAMP
                 </h2>
-                <p className="txt-md text-blue-800 justify-center">Rate tasting with stars, collect a stamp, and add your tasting notes! </p>
+                <p className="txt-md text-blue-800 flex items-center justify-center">Rate tasting with stars, collect a stamp, and add your tasting notes! </p>
                 {/*<p className="text-blue-700 font-mono text-xs overflow-hidden truncate">
                     User ID: {userId || 'Authenticating...'}
                 </p>*/}
             </Card>
 
-            <Card className="grid grid-cols-2 gap-4 text-center">
+            <Card className="bg-yellow-50 grid grid-cols-2 gap-4 text-center">
                 <div>
-                    <p className="text-4xl font-extrabold text-cyan-400">
-                        {tastedSakes.length} <img src={stamp} alt="HelloKitty Stamp" className="w-5 h-5 m1-2 object-contain"/>
-                        </p>
+                    <p className="text-4xl font-extrabold text-cyan-400 flex items-center justify-center">
+                        {tastedSakes.length} <img src={stamp} alt="HelloKitty Stamp" className="w-7 h-6 m1-2 object-contain"/>
+                    </p>
                     <p className="text-sm font-medium text-gray-500">Sakes Stamped</p>
                     <p className="text-xs text-gray-400">/ {totalSakes} Total</p>
                 </div>
@@ -50,7 +50,7 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
                 </div>
             </Card>
 
-            <Card>
+            <Card className="bg-yellow-50">
                 <h3 className="text-xl font-bold text-blue-950 mb-4">Your Detailed History</h3>
                 {tastedSakes.length === 0 ? (
                     <div className="text-gray-500 italic p-4 text-center border-2 border-dashed rounded-lg">
