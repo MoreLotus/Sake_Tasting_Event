@@ -26,10 +26,10 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
         <div className="p-4 space-y-6">
 
             {/* 🚀 NEW: Custom Image Banner */}
-            <Card className="bg-yellow-500 border-yellow-100">
-                <h1 className="text-3x1 font-extrabold text-blue-900 text-center">
+            <Card className="bg-yellow-100 border-yellow-100">
+                <h4 className="text-3x1 font-extrabold text-blue-900 text-center">
                     MAP
-                </h1>
+                </h4>
                 <p className="text-md text-blue-950 text-center">
                     Zoom in to locate stations throughout the park.
                     Don't forget to check out the Limited Omaksae Flights and Full Bar!
@@ -39,7 +39,7 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
                 <img 
                     src={map} 
                     alt="Map" 
-                    className="w-full h-48 object-cover object-center" 
+                    className="w-full h-70 object-cover object-center" 
                     // h-48 sets the height, object-cover ensures it fills the space without stretching
                 />
             </div>
