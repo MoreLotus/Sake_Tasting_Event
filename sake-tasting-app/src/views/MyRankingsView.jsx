@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { QrCode, Star } from 'lucide-react';
 import { Card, StarRating } from '../components/Utility';
-import stamp from './custom_image/hello_kitty.png';
+import stamp from '../custom_image/hello_kitty.png';
 
 
 const MyRankingsView = ({ sakeData, rankings, userId }) => {
