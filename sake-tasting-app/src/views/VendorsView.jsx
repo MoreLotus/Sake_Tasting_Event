@@ -23,7 +23,7 @@ const VendorsView = ({ vendorData }) => {
             
             {/* Vendor Details */}
             <div className="flex-grow">
-              <h3 className="font-bold text-gray-800">{vendor.name}</h3>
+              <h3 className="font-bold text-blue-950">{vendor.name}</h3>
               <p className="text-xs text-gray-500 mb-1">{vendor.specialty}</p>
             </div>
             
