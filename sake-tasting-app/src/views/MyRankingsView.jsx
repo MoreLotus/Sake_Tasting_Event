@@ -24,26 +24,6 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
 
     return (
         <div className="p-4 space-y-6">
-
-            {/* 🚀 NEW: Custom Image Banner */}
-            <Card className="bg-yellow-100 border-yellow-100">
-                <h4 className="text-3xl font-extrabold text-blue-900 text-center">
-                    MAP
-                </h4>
-                <p className="text-md text-blue-800 text-center">
-                    Zoom in to locate stations throughout the park.
-                    Don't forget to check out the Limited Omaksae Flights and Full Bar!
-                </p>
-            </Card>
-            <div className="w-full rounded-xl overflow-hidden shadow-lg border-2 border-sky-600">
-                <img 
-                    src={map} 
-                    alt="Map" 
-                    className="w-full h-70 object-cover object-center" 
-                    // h-48 sets the height, object-cover ensures it fills the space without stretching
-                />
-            </div>
-
             {/* Passport Summary Card */}
             <Card className="bg-yellow-100 border-yellow-100">
                 <h2 className="text-3xl font-extrabold text-blue-900 mb-2 flex items-center justify-center">
