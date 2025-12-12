@@ -8,7 +8,7 @@ import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Tent, X } from 'lu
 import { SAKE_DATA, VIEWS, VENDOR_DATA } from './config/constants';
 import useFirebase from './hooks/useFirebase';
 import useSakeRankings from './hooks/useSakeRankings';
-// import useLocalStorage from './hooks/useLocalStorage'; // ❌ REMOVED: No longer needed for modal state
+import useLocalStorage from './hooks/useLocalStorage'; // ❌ REMOVED: No longer needed for modal state
 import { Loader, ErrorMessage } from './components/Utility';
 import Modal from './components/Modal';
 import logo from './custom_image/HSM_Yellow_Emblem.png';
@@ -25,6 +25,10 @@ const App = () => {
     
     const [currentView, setCurrentView] = useState(VIEWS.MAP); 
     
+    // 🚀 RETRIEVE USER NAME: Get the name from local storage
+    const [userName, setUserName] = useLocalStorage('passportName', '');
+    const displayUserName = userName || 'My'; // Use 'My' as fallback if name is empty
+
     // 🚀 MODAL STATE MANAGEMENT FIX: 
     // Set to true by default, and remove all checks/saving logic.
     // 1. Removed hasSeenWelcome state
@@ -74,7 +78,7 @@ const App = () => {
         );
     };
 
-    const NavItem = ({ view, currentView, setCurrentView }) => {
+    const NavItem = ({ view, currentView, setCurrentView, displayUserName }) => {
         const isActive = view === currentView;
         
         const icon = {
@@ -85,6 +89,12 @@ const App = () => {
         }[view];
         const IconComponent = icon || List;
 
+        // 🚀 CUSTOM LABEL LOGIC
+        const label = view === VIEWS.PASSPORT 
+            ? `${displayUserName}'s Passport` // Use the user's name
+            : view;
+
+
         return (
             <button
                 onClick={() => setCurrentView(view)}
@@ -93,7 +103,7 @@ const App = () => {
                 }`}
             >
                 <IconComponent className="w-6 h-6 mb-1" />
-                <span className="text-xs font-semibold">{view.replace('Passport', 'My Passport')}</span>
+                <span className="text-xs font-semibold">{label}</span>
             </button>
         );
     };
