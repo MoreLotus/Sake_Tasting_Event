@@ -1,6 +1,6 @@
 // --- src/App.jsx ---
 
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useEffect } from 'react'; // 💡 IMPORTED useEffect
 // 💡 Included Map, List, Tent, Book for the four nav items
 import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Tent, X } from 'lucide-react'; 
 
@@ -22,12 +22,16 @@ import MyRankingsView from './views/MyRankingsView';
 
 
 const App = () => {
-    // 💡 Set MAP as default view, as requested, now that Welcome is a modal
+    
     const [currentView, setCurrentView] = useState(VIEWS.MAP); 
     
-    // 🚀 MODAL STATE MANAGEMENT (Keep this section for the welcome popup)
+    // 🚀 MODAL STATE MANAGEMENT
+    // 1. Tracks if the user has seen the welcome modal before (read from localStorage)
     const [hasSeenWelcome, setHasSeenWelcome] = useLocalStorage('hasSeenWelcome', false);
-    const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+    
+    // 2. Controls the visibility state of the modal. Set initial state to null/false
+    //    until we confirm the value from localStorage.
+    const [showWelcomeModal, setShowWelcomeModal] = useState(false); 
     
     // 💡 FIX: Use useEffect to set the modal visibility AFTER localStorage is read.
     useEffect(() => {
@@ -36,7 +40,8 @@ const App = () => {
             setShowWelcomeModal(true);
         }
     }, [hasSeenWelcome]); // Re-run only if the hasSeenWelcome value changes.
-
+    
+    // Function to close the modal and mark it as seen
     const handleCloseWelcome = () => {
         setShowWelcomeModal(false);
         setHasSeenWelcome(true);
@@ -59,9 +64,7 @@ const App = () => {
                 <div className="overflow-y-auto h-full">
                     {(() => {
                         switch (currentView) {
-                            // 💡 Added MapView back to the switch statement
                             case VIEWS.MAP:
-                                // Assuming MapView handles the 'loading' prop if needed
                                 return <MapView sakeData={SAKE_DATA} rankings={rankings} loading={loading} />;
                             case VIEWS.SAKES:
                                 return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} loading={loading} />;
@@ -69,7 +72,6 @@ const App = () => {
                                 return <MyRankingsView sakeData={SAKE_DATA} rankings={rankings} userId={userId} loading={loading} />;
                             case VIEWS.VENDORS:
                                 return <VendorsView vendorData={VENDOR_DATA} />;
-                            // Default should probably be Sakes or Map since Welcome is gone
                             default:
                                 return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} loading={loading} />;
                         }
@@ -81,7 +83,6 @@ const App = () => {
     };
 
     const NavItem = ({ view, currentView, setCurrentView }) => {
-        // 🚀 REMOVED: No need for handleClick, as the Welcome tab is no longer a navigation item.
         const isActive = view === currentView;
         
         const icon = {
@@ -92,11 +93,9 @@ const App = () => {
         }[view];
         const IconComponent = icon || List;
 
-        // 🚀 CRITICAL: We changed w-1/3 to flex-1 previously, which is good for 4 or more tabs.
-        // It's already in your code, but I'll leave the comment.
         return (
             <button
-                onClick={() => setCurrentView(view)} // Direct setCurrentView
+                onClick={() => setCurrentView(view)}
                 className={`flex flex-col items-center justify-center p-3 sm:p-4 flex-1 transition-colors duration-200 ${
                     isActive ? 'text-sky-800 bg-blue-50' : 'text-gray-500 hover:text-sky-500'
                 }`}
@@ -108,7 +107,6 @@ const App = () => {
     };
 
     // Define the list of views that should appear in the navigation bar
-    // 💡 Filter out VIEWS.WELCOME to only show the requested tabs.
     const navViews = Object.values(VIEWS).filter(view => 
         view !== VIEWS.WELCOME
     );
@@ -134,10 +132,8 @@ const App = () => {
                 {renderContent()}
             </main>
 
-            {/* Mobile Navigation (Fixed Bottom) */}
             <nav className="flex-shrink-0 bg-white border-t border-gray-200 shadow-2xl z-20">
                 <div className="flex justify-around pb-[env(safe-area-inset-bottom)]">
-                    {/* 🚀 NAV BAR FILTER: Use the filtered array */}
                     {navViews.map((view) => (
                         <NavItem
                             key={view}
