@@ -69,7 +69,7 @@ const App = () => {
 
     return (
         // Set root container to full screen and column flex
-        <div className="h-screen bg-sky-800 font-sans flex flex-col overflow-hidden max-w-xl mx-auto w-full">
+        <div className="h-screen bg-sky-700 font-sans flex flex-col overflow-hidden max-w-xl mx-auto w-full">
             <style jsx global>{`
                 body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
                 .h-screen { height: 100vh; }
