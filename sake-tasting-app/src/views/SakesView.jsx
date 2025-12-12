@@ -1,7 +1,11 @@
+// --- SakesView.jsx ---
+
 import React from 'react';
 import { List } from 'lucide-react';
 import { Card } from '../components/Utility';
 import SakeCard from '../components/SakeCard';
+// 💡 Logo imported here
+import stampLogo from '../custom_image/hello_kitty.png'; 
 
 const SakesView = ({ sakeData, rankings, updateRanking }) => {
     return (
@@ -20,6 +24,7 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
                         sake={sake}
                         ranking={rankings[sake.id]}
                         updateRanking={updateRanking}
+                        stampLogo={stampLogo} // 💡 Logo passed as prop
                     />
                 ))}
             </div>

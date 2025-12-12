@@ -1,9 +1,11 @@
+// --- src/components/SakeCard.jsx ---
+
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, Wine, Package, Edit2, ChevronDown, ChevronUp } from 'lucide-react';
 import { Card, StarRating } from './Utility';
 
-// --- RENDER OPTIMIZATION: React.memo prevents unnecessary re-renders of list items ---
-const SakeCard = React.memo(({ sake, ranking, updateRanking }) => {
+// 💡 ACCEPT the new prop: stampLogo
+const SakeCard = React.memo(({ sake, ranking, updateRanking, stampLogo }) => {
     const currentRating = ranking?.rating || 0;
     const currentNotes = ranking?.notes || '';
     const isTasted = ranking?.tasted || false;
@@ -12,26 +14,25 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking }) => {
     const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
-        // Sync local state with remote state when it changes
         setLocalNotes(currentNotes);
     }, [currentNotes]);
 
     const handleRating = (newRating) => {
-        // If the user rates, they must have tasted it
         updateRanking(sake.id, { rating: newRating, tasted: true });
     };
 
     const handleStamp = () => {
-        // Toggle the tasted status
-        updateRanking(sake.id, { tasted: !isTasted });
+        // Toggle the tasted status, preserving the current rating
+        updateRanking(sake.id, { tasted: !isTasted, rating: currentRating }); 
     };
 
     const saveNotes = async (e) => {
         if (e.key === 'Enter' || e.type === 'blur') {
             setIsSaving(true);
-            await updateRanking(sake.id, { notes: localNotes, tasted: true });
+            // Ensure stamping when saving notes
+            await updateRanking(sake.id, { notes: localNotes, tasted: true }); 
             setIsSaving(false);
-            e.target.blur(); // Hide keyboard after saving
+            e.target.blur(); 
         }
     };
 
@@ -84,7 +85,8 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking }) => {
                             onKeyDown={saveNotes}
                             placeholder="e.g., 'Sweet melon, great acidity.'"
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-yellow-500 transition-shadow"
-                            disabled={!isTasted && currentRating === 0}
+                            // Notes are disabled until stamped or rated
+                            disabled={!isTasted && currentRating === 0} 
                         />
                     </div>
                 </div>
@@ -98,24 +100,40 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking }) => {
                     <StarRating rating={currentRating} size={24} onRate={handleRating} />
                 </div>
 
-                {/* Stamp Button */}
-                <button
-                    onClick={handleStamp}
-                    className={`w-36 py-2 px-3 text-sm rounded-full font-bold transition-all duration-200
-                        ${isTasted
-                            ? 'bg-green-600 text-white shadow-md hover:bg-green-700'
-                            : 'bg-gray-400 text-white shadow-md hover:bg-gray-500'
-                        }`}
-                >
-                    <div className="flex items-center justify-center">
+                {/* 🚀 STAMP BUTTON OVERHAUL */}
+                <div className="flex flex-col items-end">
+                    <button
+                        onClick={handleStamp}
+                        className={`w-28 h-28 p-2 rounded-full transition-all duration-300 flex items-center justify-center 
+                            ${isTasted 
+                                ? 'bg-white border-4 border-blue-600 shadow-xl' // Stamped: Solid circle with border
+                                : 'bg-gray-100 border-2 border-dashed border-gray-400 hover:border-blue-500' // Unstamped: Dashed circle
+                            }`}
+                        style={{ minWidth: '7rem', minHeight: '7rem' }} 
+                    >
                         {isTasted ? (
-                            <CheckCircle className="w-5 h-5 mr-2" />
+                            // 🚀 STATE 1: STAMPED (Display Custom Logo)
+                            <div className="flex flex-col items-center justify-center w-full h-full">
+                                <img 
+                                    src={stampLogo} 
+                                    alt="Stamped" 
+                                    className="w-full h-full object-contain p-2" 
+                                />
+                            </div>
                         ) : (
-                            <Package className="w-5 h-5 mr-2" />
+                            // 🚀 STATE 2: NOT STAMPED (Display Empty Circle and Label)
+                            <div className="flex flex-col items-center text-center text-gray-500 hover:text-blue-600 transition-colors">
+                                {/* Empty Circle Visual */}
+                                <div className="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center mb-1">
+                                    <Wine className="w-6 h-6 opacity-50" />
+                                </div>
+                                <span className="text-xs font-bold uppercase tracking-wider">
+                                    Stamp Here
+                                </span>
+                            </div>
                         )}
-                        {isTasted ? 'Stamped!' : 'Stamp Here'}
-                    </div>
-                </button>
+                    </button>
+                </div>
             </div>
         </Card>
     );
