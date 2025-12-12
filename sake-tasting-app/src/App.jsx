@@ -23,7 +23,7 @@ import MyRankingsView from './views/MyRankingsView';
 
 const App = () => {
     // 💡 NEW: Set SAKES as default view, since Welcome will be a modal
-    const [currentView, setCurrentView] = useState(VIEWS.SAKES); 
+    const [currentView, setCurrentView] = useState(VIEWS.MAP); 
     
     // 🚀 MODAL STATE MANAGEMENT
     // 1. Tracks if the user has seen the welcome modal before
@@ -72,18 +72,18 @@ const App = () => {
     };
 
     const NavItem = ({ view, currentView, setCurrentView }) => {
-        // 💡 Function to potentially reopen modal if user clicks the welcome tab
+        /*// 💡 Function to potentially reopen modal if user clicks the welcome tab
         const handleClick = () => {
             if (view === VIEWS.WELCOME) {
                 setShowWelcomeModal(true); // Re-open the modal
             }
             setCurrentView(view);
-        };
+        };*/
         
         const isActive = view === currentView;
         const icon = {
-            [VIEWS.SAKES]: List,
             [VIEWS.MAP]: Map,
+            [VIEWS.SAKES]: List,
             [VIEWS.VENDORS]: Tent, // 💡 Updated to Tent icon
             [VIEWS.PASSPORT]: Book, 
         }[view];

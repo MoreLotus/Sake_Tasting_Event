@@ -49,8 +49,8 @@ export const VENDOR_DATA = [
 ]
 
 export const VIEWS = {
-    //MAP: 'Map',
-    WELCOME: 'Welcome',
+    MAP: 'Map',
+    //WELCOME: 'Welcome',
     SAKES: 'Sakes',
     PASSPORT: 'Passport',
     VENDORS: 'Vendors'
