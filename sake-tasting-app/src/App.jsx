@@ -1,37 +1,34 @@
 // --- src/App.jsx ---
 
 import React, { useState, Suspense } from 'react';
-// 💡 Added Tent (ideal vendor icon) and X (for modal close)
+// 💡 Included Map, List, Tent, Book for the four nav items
 import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Tent, X } from 'lucide-react'; 
 
 // Import local modularized files
 import { SAKE_DATA, VIEWS, VENDOR_DATA } from './config/constants';
 import useFirebase from './hooks/useFirebase';
 import useSakeRankings from './hooks/useSakeRankings';
-import useLocalStorage from './hooks/useLocalStorage'; // 💡 NEW: Import useLocalStorage
+import useLocalStorage from './hooks/useLocalStorage';
 import { Loader, ErrorMessage } from './components/Utility';
-import Modal from './components/Modal'; // 💡 NEW: Import Modal component
+import Modal from './components/Modal';
 import logo from './custom_image/HSM_Yellow_Emblem.png';
 
 // Import Views
 import WelcomeView from './views/WelcomeView';
-import MapView from './views/MapView'; // MapView is likely removed/unused
+import MapView from './views/MapView'; 
 import SakesView from './views/SakesView';
 import VendorsView from './views/VendorsView';
 import MyRankingsView from './views/MyRankingsView';
 
 
 const App = () => {
-    // 💡 NEW: Set SAKES as default view, since Welcome will be a modal
+    // 💡 Set MAP as default view, as requested, now that Welcome is a modal
     const [currentView, setCurrentView] = useState(VIEWS.MAP); 
     
-    // 🚀 MODAL STATE MANAGEMENT
-    // 1. Tracks if the user has seen the welcome modal before
+    // 🚀 MODAL STATE MANAGEMENT (Keep this section for the welcome popup)
     const [hasSeenWelcome, setHasSeenWelcome] = useLocalStorage('hasSeenWelcome', false);
-    // 2. Controls the visibility state of the modal
     const [showWelcomeModal, setShowWelcomeModal] = useState(!hasSeenWelcome);
     
-    // Function to close the modal and mark it as seen
     const handleCloseWelcome = () => {
         setShowWelcomeModal(false);
         setHasSeenWelcome(true);
@@ -54,13 +51,17 @@ const App = () => {
                 <div className="overflow-y-auto h-full">
                     {(() => {
                         switch (currentView) {
+                            // 💡 Added MapView back to the switch statement
+                            case VIEWS.MAP:
+                                // Assuming MapView handles the 'loading' prop if needed
+                                return <MapView sakeData={SAKE_DATA} rankings={rankings} loading={loading} />;
                             case VIEWS.SAKES:
                                 return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} loading={loading} />;
                             case VIEWS.PASSPORT:
                                 return <MyRankingsView sakeData={SAKE_DATA} rankings={rankings} userId={userId} loading={loading} />;
                             case VIEWS.VENDORS:
                                 return <VendorsView vendorData={VENDOR_DATA} />;
-                            // 🚀 REMOVED: VIEWS.WELCOME case is now handled by the Modal
+                            // Default should probably be Sakes or Map since Welcome is gone
                             default:
                                 return <SakesView sakeData={SAKE_DATA} rankings={rankings} updateRanking={updateRanking} loading={loading} />;
                         }
@@ -72,27 +73,23 @@ const App = () => {
     };
 
     const NavItem = ({ view, currentView, setCurrentView }) => {
-        /*// 💡 Function to potentially reopen modal if user clicks the welcome tab
-        const handleClick = () => {
-            if (view === VIEWS.WELCOME) {
-                setShowWelcomeModal(true); // Re-open the modal
-            }
-            setCurrentView(view);
-        };*/
-        
+        // 🚀 REMOVED: No need for handleClick, as the Welcome tab is no longer a navigation item.
         const isActive = view === currentView;
+        
         const icon = {
             [VIEWS.MAP]: Map,
             [VIEWS.SAKES]: List,
-            [VIEWS.VENDORS]: Tent, // 💡 Updated to Tent icon
+            [VIEWS.VENDORS]: Tent,
             [VIEWS.PASSPORT]: Book, 
         }[view];
         const IconComponent = icon || List;
 
+        // 🚀 CRITICAL: We changed w-1/3 to flex-1 previously, which is good for 4 or more tabs.
+        // It's already in your code, but I'll leave the comment.
         return (
             <button
-                onClick={handleClick} // Use new handleClick function
-                className={`flex flex-col items-center justify-center p-3 sm:p-4 flex-1 transition-colors duration-200 ${ // 💡 Changed w-1/3 to flex-1
+                onClick={() => setCurrentView(view)} // Direct setCurrentView
+                className={`flex flex-col items-center justify-center p-3 sm:p-4 flex-1 transition-colors duration-200 ${
                     isActive ? 'text-sky-800 bg-blue-50' : 'text-gray-500 hover:text-sky-500'
                 }`}
             >
@@ -102,16 +99,20 @@ const App = () => {
         );
     };
 
+    // Define the list of views that should appear in the navigation bar
+    // 💡 Filter out VIEWS.WELCOME to only show the requested tabs.
+    const navViews = Object.values(VIEWS).filter(view => 
+        view !== VIEWS.WELCOME
+    );
+
     return (
         <div className="h-dynamic bg-sky-700 font-sans flex flex-col overflow-hidden max-w-xl mx-auto w-full">
-            {/* Global CSS for h-dynamic fix */}
             <style jsx global>{`
                 body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
                 .h-dynamic { height: 100vh; }
                 @supports (height: 100dvh) { .h-dynamic { height: 100dvh; }}
             `}</style>
             
-            {/* Header */}
             <header className="bg-red-700 flex-shrink-0 shadow-md z-10">
                 <div className="p-4 flex justify-center items-center border-b border-red-700">
                     <h1 className="text-4xl font-black text-white flex items-center">
@@ -121,15 +122,15 @@ const App = () => {
                 </div>
             </header>
 
-            {/* Main Content Area (Scrollable) */}
             <main className="flex-grow w-full overflow-hidden">
                 {renderContent()}
             </main>
 
             {/* Mobile Navigation (Fixed Bottom) */}
             <nav className="flex-shrink-0 bg-white border-t border-gray-200 shadow-2xl z-20">
-                <div className="flex justify-around pb-[env(safe-area-inset-bottom)]"> {/* 💡 Fixed typo: insert -> inset */}
-                    {Object.values(VIEWS).map((view) => (
+                <div className="flex justify-around pb-[env(safe-area-inset-bottom)]">
+                    {/* 🚀 NAV BAR FILTER: Use the filtered array */}
+                    {navViews.map((view) => (
                         <NavItem
                             key={view}
                             view={view}
@@ -140,7 +141,7 @@ const App = () => {
                 </div>
             </nav>
             
-            {/* 🚀 WELCOME MODAL */}
+            {/* WELCOME MODAL (Renders only once, on load) */}
             {showWelcomeModal && (
                 <Modal onClose={handleCloseWelcome}>
                     <WelcomeView />
