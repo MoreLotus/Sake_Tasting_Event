@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+.h-dynamic {
+  height: 100vh;
+}
+
+@supports (height: 100dvh){
+  .h-dynamic{
+    height: 100dvh;
+  }
+}

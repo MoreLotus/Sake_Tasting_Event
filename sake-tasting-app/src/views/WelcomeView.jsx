@@ -78,27 +78,6 @@ const WelcomeView = () => {
           Let's embark on a delicious journey through the world of sake!
         </p>
       </Card>
-
-      {/* Cultural Graphics / Illustrations Section - Fixed Sizing and Flex */}
-      <div className="flex justify-around items-center w-full max-w-md p-4 bg-blue-300">
-        {/* Logo 1 Container */}
-        <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
-          <img src={logo1} alt="logo1" className="w-full h-full object-contain"/>
-        </div>
-        {/* Logo 2 Container */}
-        <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
-          <img src={logo2} alt="logo2" className="w-full h-full object-contain"/>
-        </div>
-        {/* Logo 3 Container */}
-        <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
-          <img src={logo3} alt="logo3" className="w-full h-full object-contain"/>
-        </div>
-      </div>
-
-      {/* Call to Action or Footer */}
-      <p className="text-sm text-gray-600 mt-4">
-        Don't forget to visit our amazing Food Vendors!
-      </p>
     </div>
   );
 };
