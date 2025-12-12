@@ -65,13 +65,14 @@ const WelcomeView = () => {
       {/* App Explanation Card */}
       <Card className="bg-white border-gray-200 shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-gray-800 flex items-center justify-center mb-3">
-          Your Digital Sake Passport <Wine className="w-6 h-6 ml-2" />
+          {displayUserName}'s Digital Sake Passport
         </h2>
         <p className="text-md text-gray-700 mb-4">
-          This app is your companion for the evening! It's designed to make your sake tasting adventure even more enjoyable.
+          Explore, taste and track using this app as you make your way through the sake, whisky and spirit samples.           
+          Make sure to swing by and explore all the awesome food and merch vendors!
         </p>
         <p className="text-md text-gray-700">
-          **Explore, Taste, and Track!** Use this app to discover all the amazing sakes available, keep notes on your favorites, and mark off the ones you've tried.
+          Keep notes on your favorites and collect a stamp after trying each one!
         </p>
         <p className="text-sm text-gray-500 mt-4 italic">
           Let's embark on a delicious journey through the world of sake!
