@@ -9,17 +9,17 @@ const VendorsView = ({ vendorData }) => {
     <div className="p-4 space-y-4">
         
       {/* Informational Header Card */}
-      <Card className="bg-blue-50 border-blue-200 shadow-sm w-full">
-        <h2 className="text-xl font-bold text-blue-800 flex items-center">
+      <Card className="bg-yellow-50 border-yellow-50 shadow-sm w-full">
+        <h2 className="text-xl font-bold text-blue-950 flex items-center">
           <ShoppingBag className="w-6 h-6 mr-2" /> Vendors
         </h2>
-        <p className="text-sm text-blue-700">Below is a list of all the food trucks and vendors here. Make sure to give them a visit!</p>
+        <p className="text-sm text-blue-950">Below is a list of all the food trucks and vendors here. Make sure to give them a visit!</p>
       </Card>
 
       {/* List of Vendors */}
       <div className="space-y-3">
         {vendorData.map((vendor) => (
-          <Card key={vendor.id} className="flex justify-between items-center p-3">
+          <Card key={vendor.id} className="bg-yellow-50 flex justify-between items-center p-3">
             
             {/* Vendor Details */}
             <div className="flex-grow">

@@ -12,7 +12,7 @@ export const StarRating = ({ rating, size = 20, onRate }) => {
                 key={i}
                 size={size}
                 className={`cursor-pointer transition-colors duration-200 ${
-                    isFilled ? 'text-cyan-400 fill-yellow-400' : 'text-gray-300'
+                    isFilled ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
                 }`}
                 onClick={() => onRate(i)}
             />
@@ -22,7 +22,7 @@ export const StarRating = ({ rating, size = 20, onRate }) => {
 };
 
 export const Card = ({ children, className = '' }) => (
-    <div className={`bg-yellow-50 p-4 shadow-xl rounded-xl border border-gray-100 ${className}`}>
+    <div className={`bg-white p-4 shadow-xl rounded-xl border border-gray-100 ${className}`}>
         {children}
     </div>
 );
