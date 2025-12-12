@@ -27,8 +27,16 @@ const App = () => {
     
     // 🚀 MODAL STATE MANAGEMENT (Keep this section for the welcome popup)
     const [hasSeenWelcome, setHasSeenWelcome] = useLocalStorage('hasSeenWelcome', false);
-    const [showWelcomeModal, setShowWelcomeModal] = useState(!hasSeenWelcome);
+    const [showWelcomeModal, setShowWelcomeModal] = useState(false);
     
+    // 💡 FIX: Use useEffect to set the modal visibility AFTER localStorage is read.
+    useEffect(() => {
+        // If localStorage says the user has NOT seen the welcome, show the modal.
+        if (!hasSeenWelcome) {
+            setShowWelcomeModal(true);
+        }
+    }, [hasSeenWelcome]); // Re-run only if the hasSeenWelcome value changes.
+
     const handleCloseWelcome = () => {
         setShowWelcomeModal(false);
         setHasSeenWelcome(true);
