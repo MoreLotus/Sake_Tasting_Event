@@ -42,6 +42,19 @@ export const SAKE_DATA = [
     { id: 'sake-11', name: 'Valley ', brewery: 'Wren House', type: 'Lager', description: 'GABF 2019 Silver, CBA Silver Winner - American Lager.', location: 'S6', abv: '4.6%', flavor: 'Crisp, clean, honey and spice.', pairs: 'Spicy Food', stampImage: stamp11},
 ]
 
+export const OMAKASE_SAKE = [
+    { id: 's1', brewery: 'Arizona Sake', name: 'Navajo Tea', type: 'Junmai Ginjo', description: 'Az Sake took their standard Junmai Ginjo sake and added wild-harvested Navajo Tea.   It is a very beautiful presentation with small slivers of the tea bush in the bottle.The tea and sake have been pasteurized but the color and flavor from the tea will continue to steep and deepen as the bottle gets older.', abv: '15%', flavor: 'Earthy, Clean, Fresh', pairs: 'Seafood'},
+    { id: 's2', brewery: 'Arizona Sake', name: 'Desert Snow', type: 'Sparkling Nigori', description: 'An unfiltered Nigori that has a beautiful layer of sediment on the bottom. A slight agitation will cause the bottle to look like a snow globe.', abv: '15%', flavor: 'Fruity, Cream', pairs: 'Spicy Food'},
+    { id: 's3', brewery: 'Hanagoi', name: 'Umeshu', type: 'Umeshu', description: 'Umeshu is a plum infused Sake. Slightly sweeter flavor making for a perfect apertif or digestif.', abv: '12%', flavor: 'Plum Citrus, Smooth', pairs: 'Seafood, Meat'},
+    { id: 's4', brewery: 'Hakutsuru', name: 'Sayuri', type: 'Junmai Nigori', description: 'Sayuri means "little lily" a perfect description for this soft floral-noted Nigori. This unfiltered sake has a very light nose filled with lush cream, cherry blossom, and light fruit. Semi-sweet palate with a very smooth finish.', abv: '12.5%', flavor: 'Floral, Cream, Smooth', pairs: 'Spicy Food'}
+]
+
+export const OMAKASE_WHISKY = [
+    { id: 'w1', brewery: 'Nikka', name: 'Whisky from the Barrel', type: 'Whisky', description: 'A blended whisky created to deliver full flavors and richness of whisky "from barrels." The liquid marriage is rested in used casks for 3-6 months. Awarded Gold Medal at the 2020 World Whiskies Awards. #1 Whisky of the Year - 2018', abv: '51%', flavor: 'Rich, Malt, Peat, Spice, Complex', pairs: 'Seafood, Spicy Food'},
+    { id: 'w2', brewery: 'Yamazaki', name: '12 Year', type: 'Whisky', description: 'Vale of Yamazaki, Japan- Aged in casks of three different kinds of oaks: American, Spanish and Japanese which gives a unique taste. This is a medium-bodied whisky with the aromas of dried fruits and honey. It has a delicate, mellow taste with a lingering, woody, dry finish.', abv: '43%', flavor: 'Delicate, Butterscotch', pairs: 'Sushi'},
+    { id: 'w3', brewery: 'Kaigen', name: '3 Year', type: 'Whisky', description: 'Japan- Kaigan whisky is a blend made from 100% Japanese whisky that has been aged a minimum of 3 years. The result is a whisky deep golden in color, with aromas of fresh oak and citrus fruits. A sweet honey and vanilla taste leads to a rich bold finish.', abv: '43%', flavor: 'Rich, Oak, Citrus, Honey', pairs: 'Seafood, Meat'}
+]
+
 export const VENDOR_DATA = [
     {id: 'v1', name: 'Hot Bamboo', instagram: 'hotbamboo', specialty: 'Food Stand', location: '1'},
     {id: 'v2', name: 'Let\'s Toast', instagram: 'letstoastofficial', specialty: 'Gourmet Korean BBQ Sandwiches', location: '2'},
