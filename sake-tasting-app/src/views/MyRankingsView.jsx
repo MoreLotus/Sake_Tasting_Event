@@ -63,6 +63,13 @@ const MyRankingsView = ({ sakeData, rankings, userId }) => {
                         {tastedSakes.map((sake) => (
                             <li key={sake.id} className="border-b pb-3 last:border-b-0">
                                 <div className="flex justify-between items-start">
+                                    <div className="w-6 h-6 mr-2 flex-shrink-0">
+                                        <img
+                                            src={sake.stampImage}
+                                            alt="stamp"
+                                            className="w-full h-full object-contain"
+                                        />
+                                    </div>
                                     <div className="flex-grow">
                                         <p className="font-semibold text-blue-950">{sake.name}</p>
                                         <p className="text-xs text-blue-900">{sake.brewery}</p>

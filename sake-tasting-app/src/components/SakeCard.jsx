@@ -114,7 +114,7 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking, stampLogo }) => {
                         style={{ minWidth: '7rem', minHeight: '7rem' }} 
                     >
                         {isTasted ? (
-                            // 🚀 STATE 1: STAMPED (Display Custom Logo)
+                            //  STATE 1: STAMPED (Display Custom Logo)
                             <div className="flex flex-col items-center justify-center w-full h-full">
                                 <img 
                                     src={activeStampLogo} 

@@ -35,7 +35,7 @@ const MapView = () => {
                 <img 
                     src={key} 
                     alt="Key" 
-                    className="w-full h-50 object-cover object-center" 
+                    className="w-full h-30 object-cover object-center" 
                     // h-48 sets the height, object-cover ensures it fills the space without stretching
                 />
             </div>
