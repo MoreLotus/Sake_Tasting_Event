@@ -3,9 +3,9 @@ import { QrCode, Star } from 'lucide-react';
 import { Card, StarRating } from '../components/Utility';
 import stamp from '../custom_image/hello_kitty.png';
 import map from '../custom_image/map.png';
-import logo1 from '../custom_image/HK_HSM.png';
-import logo2 from '../custom_image/HSM_Red_Emblem.png';
-import logo3 from '../custom_image/arizona_sake.jpg';
+import logo1 from '../custom_image/suntory.png';
+import logo2 from '../custom_image/arizona_sake.png';
+import logo3 from '../custom_image/wren_house.jpg';
 import key from '../custom_image/key.png';
 
 const MapView = () => {
@@ -26,7 +26,7 @@ const MapView = () => {
                 <img 
                     src={map} 
                     alt="Map" 
-                    className="w-full h-70 object-cover object-center" 
+                    className="w-full h-64 object-cover object-center" 
                     // h-48 sets the height, object-cover ensures it fills the space without stretching
                 />
             </div>
@@ -35,7 +35,7 @@ const MapView = () => {
                 <img 
                     src={key} 
                     alt="Key" 
-                    className="w-full h-30 object-cover object-center" 
+                    className="w-full h-40 object-cover object-center" 
                     // h-48 sets the height, object-cover ensures it fills the space without stretching
                 />
             </div>
