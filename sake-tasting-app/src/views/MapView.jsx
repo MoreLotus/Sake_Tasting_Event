@@ -10,7 +10,7 @@ import key from '../custom_image/key.png';
 
 const MapView = () => {
     return (
-        <div className="p-4 space-y-6">
+        <div className="p-4 flex flex-col items-center space-y-6">
             {/* 🚀 NEW: Custom Image Banner */}
             <Card className="bg-yellow-100 border-yellow-100">
                 <h4 className="text-3xl font-extrabold text-blue-900 text-center">
@@ -41,20 +41,17 @@ const MapView = () => {
             </div>
 
             {/* Cultural Graphics / Illustrations Section - Fixed Sizing and Flex */}
-            <div className="flex justify-around items-center w-full max-w-md bg-blue-300">
-                {/* Logo 1 Container */}
-                <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
-                    <img src={logo1} alt="logo1" className="w-full h-full object-contain"/>
-                </div>
-                {/* Logo 2 Container */}
-                <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
-                    <img src={logo2} alt="logo2" className="w-full h-full object-contain"/>
-                </div>
-                {/* Logo 3 Container */}
-                <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
-                    <img src={logo3} alt="logo3" className="w-full h-full object-contain"/>
-                </div>
-            </div>
+            <div className="flex justify-around items-center w-full max-w-md p-4 bg-blue-300">
+                <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
+                    <img src={logo1} alt="logo1" className="w-full h-full object-contain"/>
+                </div>
+                <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
+                    <img src={logo2} alt="logo2" className="w-full h-full object-contain"/>
+                </div>
+                <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center">
+                    <img src={logo3} alt="logo3" className="w-full h-full object-contain"/>
+                </div>
+            </div>
         </div>
     );
 };
