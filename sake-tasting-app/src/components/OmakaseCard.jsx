@@ -13,14 +13,14 @@ const OmakaseCard = ({ item }) => {
             return {
                 bg: 'bg-pink-100',          // Light Pink background
                 border: 'border-pink-400',  // Darker Pink border
-                headerText: 'text-pink-800' // Text color for the card's name
+                headerText: 'text-red-800' // Text color for the card's name
             };
         } else if (prefix === 'w') {
             // Orange theme for Whisky (IDs starting with 'w')
             return {
                 bg: 'bg-orange-100',        // Light Orange background
                 border: 'border-orange-400',// Darker Orange border
-                headerText: 'text-orange-800' // Text color for the card's name
+                headerText: 'text-blue-800' // Text color for the card's name
             };
         } else {
             // Default colors for unknown IDs
@@ -31,16 +31,18 @@ const OmakaseCard = ({ item }) => {
             };
         }
     };
-    
+
+    const colors = getCardColors(item.id);
+
     return (
         // Distinct styling for Omakase items
-        <Card className={`flex flex-col justify-between items-start space-y-3 bg-blue-50 border-blue-400`}>
+        <Card className={`flex flex-col justify-between items-start space-y-3 ${colors.bg} ${colors.border}`}>
             
             {/* Header Content */}
             <div className="w-full">
                 <div className="flex justify-between items-center mb-1">
                     {/* Bold name, red color for distinction */}
-                    <h3 className="text-lg font-bold text-red-700">
+                    <h3 className={'text-lg font-bold ${colors.headerText}'}>
                         {item.name}
                     </h3>
                     <p className="text-sm font-semibold text-gray-700">{item.type}</p>
@@ -60,8 +62,8 @@ const OmakaseCard = ({ item }) => {
 
             {/* For Sale Call to Action */}
             <div className="w-full flex justify-center items-center pt-2 border-t border-blue-100 mt-3">
-                <DollarSign className="w-5 h-5 mr-2 text-red-600"/>
-                <span className="text-lg font-bold text-red-700">Available for Purchase</span>
+                <DollarSign className={'w-5 h-5 mr-2 ${colors.headerText}'}/>
+                <span className={'text-lg font-bold ${colors.headerText}'}>Available for Purchase</span>
             </div>
         </Card>
     );
