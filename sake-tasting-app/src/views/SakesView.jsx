@@ -1,7 +1,7 @@
 // --- SakesView.jsx ---
 
 import React from 'react';
-import { List } from 'lucide-react';
+import { List, Diamond} from 'lucide-react';
 import { Card } from '../components/Utility';
 import SakeCard from '../components/SakeCard';
 import OmakaseCard from '../components/OmakaseCard';
@@ -10,9 +10,10 @@ import { SAKE_DATA, OMAKASE_SAKE, OMAKASE_WHISKY } from '../config/constants';
 // 💡 Logo imported here
 import stampLogo from '../custom_image/hello_kitty.png'; 
 
-const omakaseData = [...OMAKASE_SAKE, ...OMAKASE_WHISKY];
-
 const SakesView = ({ sakeData, rankings, updateRanking }) => {
+
+    const omakaseData = [...OMAKASE_SAKE, ...OMAKASE_WHISKY];
+
     return (
         <div className="p-4 space-y-4">
             <Card className="bg-yellow-100 border-yellow-100">
