@@ -47,58 +47,59 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
             {/* OMAKASE/FOR-SALE SECTION HEADER */}
             <div className="pt-6">
                 <Card className="bg-sky-300 text-red-700 border-red-800 shadow-xl">
-                    <h2 className="text-2xl font-black flex text-center items-center justify-center mb-1">
-                        <Diamond className="w-6 h-6 mr-2 text-yellow-300 fill-yellow-300" />
-                         OMAKASE<br/>
-                        (Purchase separately at B2)
-                        <Diamond className="w-6 h-6 mr-2 text-yellow-300 fill-yellow-300" />
+                    <h2 className="text-2xl font-black flex flex-col text-center items-center justify-center mb-1">
+                        <div className="flex items-center"> {/* Wraps OMAKASE and Diamonds on one line */}
+                            <Diamond className="w-6 h-6 mr-2 text-yellow-300 fill-yellow-300" />
+                            OMAKASE
+                            <Diamond className="w-6 h-6 ml-2 text-yellow-300 fill-yellow-300" />
+                        </div>
+                        <span className="text-base font-normal mt-1"> {/* Subtitle on new line */}
+                            (Purchase separately at B2)
+                        </span>
                     </h2>
-                    <p className="text-md font-black flex text-center">
+                    <h3 className="text-md font-black flex text-center justify-center">
                         Bar is cashless. Go to info booth for tickets
-                    </p>
+                    </h3>
                 </Card>
             </div>
 
+            {/* OMAKASE Sake Flights Header */}
             <div className="pt-6">
                 <Card className="bg-pink-300 text-pink-700 border-pink-400 shadow-xl">
-                    <h2 className="text-2xl font-black flex text-center items-center justify-center mb-1">
+                    <h2 className="text-2xl font-black flex flex-col text-center items-center justify-center mb-1">
                         OMAKASE Sake Flights 
-                        4 tickets <Ticket className="w-5 h-5 mr-2" />
+                        <div className="flex items-center text-xl mt-1"> {/* Wraps ticket info */}
+                            4 tickets <Ticket className="w-5 h-5 ml-2" />
+                        </div>
                     </h2>
                 </Card>
             </div>
             
-            {/* Omakase Sake Items (Display Only) */}
+            {/* Omakase Sake Items (Now using the safe list) */}
             <div className="space-y-4">
                 {omakaseSakeData.map((item) => (
-                    // USE THE DEDICATED OmakaseCard
-                    <OmakaseCard
-                        key={item.id}
-                        item={item}
-                    />
+                    <OmakaseCard key={item.id} item={item} />
                 ))}
             </div>
 
+            {/* OMAKASE Whiskey Flights Header */}
             <div className="pt-6">
                 <Card className="bg-orange-100 text-orange-800 border-orange-400 shadow-xl">
-                    <h2 className="text-2xl font-black flex text-center items-center justify-center mb-1">
+                    <h2 className="text-2xl font-black flex flex-col text-center items-center justify-center mb-1">
                         OMAKASE Whiskey Flights 
-                        4 tickets <Ticket className="w-5 h-5 mr-2" />
+                        <div className="flex items-center text-xl mt-1"> {/* Wraps ticket info */}
+                            4 tickets <Ticket className="w-5 h-5 ml-2" />
+                        </div>
                     </h2>
                 </Card>
             </div>
             
-            {/* Omakase Whiskey Items (Display Only) */}
+            {/* Omakase Whiskey Items (Now using the safe list) */}
             <div className="space-y-4">
-                {omakaseWhiskeyData.map((item) => (
-                    // USE THE DEDICATED OmakaseCard
-                    <OmakaseCard
-                        key={item.id}
-                        item={item}
-                    />
+                {omakaseWhiskyData.map((item) => (
+                    <OmakaseCard key={item.id} item={item} />
                 ))}
             </div>
-
 
         </div>
     );
