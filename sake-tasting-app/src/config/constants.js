@@ -59,7 +59,7 @@ export const VENDOR_DATA = [
     {id: 'v2', name: 'Let\'s Toast', instagram: 'letstoastofficial', specialty: 'Gourmet Korean BBQ Sandwiches', location: '2'},
     {id: 'v3', name: 'ThaiBBQ Sticks', instagram: 'thaistickphx', specialty: 'Thai Skewers', location: '3'},
     {id: 'v4', name: 'Kakigori', instagram: 'kakigoriaddict', specialty: 'Shaved Ice', location: '4'},
-    {id: 'v5', name: 'Twisted Munchies', instagram: 'twisted_munchies_az', specialty: 'Birria Pho & Birria Bo Kho Tacos', location: '5'},
+    //{id: 'v5', name: 'Twisted Munchies', instagram: 'twisted_munchies_az', specialty: 'Birria Pho & Birria Bo Kho Tacos', location: '5'},
     {id: 'v6', name: 'Peko Eats', instagram: 'eatpeko.az', specialty: 'Food Truck', location: '6'},
     {id: 'v7', name: 'Phenomenal Street Eats', instagram: 'phonemenalstreeteats', specialty: 'Lao-Thai Craft BBQ Food Truck', location: '7'},
     {id: 'v8', name: 'GatchaX2', instagram: 'gacha.x2', specialty: 'Merchandise', location: '8'},
