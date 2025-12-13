@@ -41,7 +41,7 @@ const MapView = () => {
             </div>
 
             {/* Cultural Graphics / Illustrations Section - Fixed Sizing and Flex */}
-            <div className="flex justify-around items-center w-full max-w-md p-4 bg-blue-300">
+            <div className="flex w-full items-center justify-between gap-6 p-4 bg-blue-300">
                 <div className="flex-1 flex justify-center">
                     <img src={logo1} alt="logo1" className="w-full h-full object-contain"/>
                 </div>
