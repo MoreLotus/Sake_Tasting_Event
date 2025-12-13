@@ -5,6 +5,33 @@ import { Card } from './Utility';
 // This component is purely for display and purchase information
 const OmakaseCard = ({ item }) => {
 
+    const getCardColors = (itemId) => {
+        const prefix = itemId[0].toLowerCase(); // Get the first letter: 's' or 'w'
+
+        if (prefix === 's') {
+            // Pink theme for Sake (IDs starting with 's')
+            return {
+                bg: 'bg-pink-100',          // Light Pink background
+                border: 'border-pink-400',  // Darker Pink border
+                headerText: 'text-pink-800' // Text color for the card's name
+            };
+        } else if (prefix === 'w') {
+            // Orange theme for Whisky (IDs starting with 'w')
+            return {
+                bg: 'bg-orange-100',        // Light Orange background
+                border: 'border-orange-400',// Darker Orange border
+                headerText: 'text-orange-800' // Text color for the card's name
+            };
+        } else {
+            // Default colors for unknown IDs
+            return {
+                bg: 'bg-gray-100',
+                border: 'border-gray-400',
+                headerText: 'text-gray-800'
+            };
+        }
+    };
+    
     return (
         // Distinct styling for Omakase items
         <Card className={`flex flex-col justify-between items-start space-y-3 bg-blue-50 border-blue-400`}>
