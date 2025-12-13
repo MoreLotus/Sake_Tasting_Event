@@ -53,9 +53,9 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
                         (Purchase separately at B2)
                         <Diamond className="w-6 h-6 mr-2 text-yellow-300 fill-yellow-300" />
                     </h2>
-                    <h3 className="text-md font-black flex text-center">
+                    <p className="text-md font-black flex text-center">
                         Bar is cashless. Go to info booth for tickets
-                    </h3>
+                    </p>
                 </Card>
             </div>
 
