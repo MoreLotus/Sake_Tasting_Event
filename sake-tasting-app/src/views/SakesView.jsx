@@ -9,6 +9,7 @@ import { SAKE_DATA, OMAKASE_SAKE, OMAKASE_WHISKY } from '../config/constants';
 
 // 💡 Logo imported here
 import stampLogo from '../custom_image/hello_kitty.png'; 
+import ad1 from '../custom_image/AD_1.png'
 
 const SakesView = ({ sakeData, rankings, updateRanking }) => {
 
@@ -31,7 +32,7 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
                     className="w-full object-cover object-center" 
                 />
             </div>
-            
+
             <div className="space-y-4">
                 {sakeData.map((sake) => (
                     <SakeCard
