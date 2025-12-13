@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Diamond} from 'lucide-react';
+import { List, Diamond, Ticket} from 'lucide-react';
 import { Card } from '../components/Utility';
 import SakeCard from '../components/SakeCard';
 import OmakaseCard from '../components/OmakaseCard';
@@ -11,7 +11,8 @@ import ad1 from '../custom_image/AD_1.png'
 
 const SakesView = ({ sakeData, rankings, updateRanking }) => {
 
-    const omakaseData = [...OMAKASE_SAKE, ...OMAKASE_WHISKY];
+    const omakaseSakeData = [...OMAKASE_SAKE];
+    const omakaseWhiskyData = [...OMAKASE_WHISKY];
 
     return (
         <div className="p-4 space-y-4">
@@ -52,12 +53,24 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
                         (Purchase separately at B2)
                         <Diamond className="w-6 h-6 mr-2 text-yellow-300 fill-yellow-300" />
                     </h2>
+                    <h3 className="text-md font-black flex text-center">
+                        Bar is cashless. Go to info booth for tickets
+                    </h3>
+                </Card>
+            </div>
+
+            <div className="pt-6">
+                <Card className="bg-pink-300 text-pink-700 border-pink-400 shadow-xl">
+                    <h2 className="text-2xl font-black flex text-center items-center justify-center mb-1">
+                        OMAKASE Sake Flights 
+                        4 tickets <Ticket className="w-5 h-5 mr-2" />
+                    </h2>
                 </Card>
             </div>
             
-            {/* Omakase Items (Display Only) */}
+            {/* Omakase Sake Items (Display Only) */}
             <div className="space-y-4">
-                {omakaseData.map((item) => (
+                {omakaseSakeData.map((item) => (
                     // USE THE DEDICATED OmakaseCard
                     <OmakaseCard
                         key={item.id}
@@ -65,6 +78,27 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
                     />
                 ))}
             </div>
+
+            <div className="pt-6">
+                <Card className="bg-orange-100 text-orange-800 border-orange-400 shadow-xl">
+                    <h2 className="text-2xl font-black flex text-center items-center justify-center mb-1">
+                        OMAKASE Whiskey Flights 
+                        4 tickets <Ticket className="w-5 h-5 mr-2" />
+                    </h2>
+                </Card>
+            </div>
+            
+            {/* Omakase Whiskey Items (Display Only) */}
+            <div className="space-y-4">
+                {omakaseWhiskeyData.map((item) => (
+                    // USE THE DEDICATED OmakaseCard
+                    <OmakaseCard
+                        key={item.id}
+                        item={item}
+                    />
+                ))}
+            </div>
+
 
         </div>
     );
