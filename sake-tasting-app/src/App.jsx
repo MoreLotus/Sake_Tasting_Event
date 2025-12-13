@@ -1,14 +1,14 @@
 // --- src/App.jsx ---
 
 import React, { useState, Suspense, useEffect } from 'react';
-// 💡 Included Map, List, Tent, Book for the four nav items
+// 💡 Ensure all necessary icons are imported
 import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Tent, X } from 'lucide-react'; 
 
 // Import local modularized files
 import { SAKE_DATA, VIEWS, VENDOR_DATA } from './config/constants';
 import useFirebase from './hooks/useFirebase';
 import useSakeRankings from './hooks/useSakeRankings';
-import useLocalStorage from './hooks/useLocalStorage'; // ❌ REMOVED: No longer needed for modal state
+import useLocalStorage from './hooks/useLocalStorage'; // 💡 REQUIRED for retrieving the userName
 import { Loader, ErrorMessage } from './components/Utility';
 import Modal from './components/Modal';
 import logo from './custom_image/HSM_Yellow_Emblem.png';
@@ -25,22 +25,16 @@ const App = () => {
     
     const [currentView, setCurrentView] = useState(VIEWS.MAP); 
     
-    // 🚀 RETRIEVE USER NAME: Get the name from local storage
+    // 1. RETRIEVE USER NAME: Get the name from local storage
     const [userName, setUserName] = useLocalStorage('passportName', '');
     const displayUserName = userName || 'My'; // Use 'My' as fallback if name is empty
 
-    // 🚀 MODAL STATE MANAGEMENT FIX: 
-    // Set to true by default, and remove all checks/saving logic.
-    // 1. Removed hasSeenWelcome state
-    // 2. showWelcomeModal is now controlled only by the user closing it
+    // 2. MODAL STATE MANAGEMENT (Always show on load)
     const [showWelcomeModal, setShowWelcomeModal] = useState(true); 
     
-    // ❌ REMOVED useEffect: No longer needed to check local storage.
-    
-    // Function to close the modal (but it will pop up on next reload)
+    // 3. Function to close the modal (and removes the screen)
     const handleCloseWelcome = () => {
         setShowWelcomeModal(false);
-        // ❌ REMOVED: setHasSeenWelcome(true);
     };
 
     const { db, userId, isAuthReady, analytics } = useFirebase();
@@ -78,6 +72,7 @@ const App = () => {
         );
     };
 
+    // 🚀 4. NavItem updated to accept displayUserName and use the correct label logic
     const NavItem = ({ view, currentView, setCurrentView, displayUserName }) => {
         const isActive = view === currentView;
         
@@ -89,9 +84,9 @@ const App = () => {
         }[view];
         const IconComponent = icon || List;
 
-        // 🚀 CUSTOM LABEL LOGIC
+        // CUSTOM LABEL LOGIC: Show user's name on Passport tab, otherwise show the view name
         const label = view === VIEWS.PASSPORT 
-            ? `${displayUserName}'s Passport` // Use the user's name
+            ? `${displayUserName}'s Passport`
             : view;
 
 
@@ -103,7 +98,7 @@ const App = () => {
                 }`}
             >
                 <IconComponent className="w-6 h-6 mb-1" />
-                <span className="text-xs font-semibold">{label}</span>
+                <span className="text-xs font-semibold whitespace-nowrap">{label}</span>
             </button>
         );
     };
@@ -142,15 +137,17 @@ const App = () => {
                             view={view}
                             currentView={currentView}
                             setCurrentView={setCurrentView}
+                            displayUserName={displayUserName} // PASS NAME PROP
                         />
                     ))}
                 </div>
             </nav>
             
-            {/* WELCOME MODAL (Will now show on every load) */}
+            {/* WELCOME MODAL: Always shows on load, and now passes the close handler */}
             {showWelcomeModal && (
                 <Modal onClose={handleCloseWelcome}>
-                    <WelcomeView />
+                    {/* PASS THE CLOSE HANDLER DOWN */}
+                    <WelcomeView onClose={handleCloseWelcome} /> 
                 </Modal>
             )}
 
