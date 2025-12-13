@@ -21,10 +21,9 @@ const VendorsView = ({ vendorData }) => {
 
       <div className="w-full rounded-xl overflow-hidden shadow-lg border-2">
         <img 
-          src={ad1} 
-          alt="AD1" 
+          src={ad2} 
+          alt="AD2" 
           className="w-full object-cover object-center" 
-          // h-48 sets the height, object-cover ensures it fills the space without stretching
         />
       </div>
 
@@ -56,15 +55,6 @@ const VendorsView = ({ vendorData }) => {
             
           </Card>
         ))}
-      </div>
-      
-      <div className="w-full rounded-xl overflow-hidden shadow-lg border-2">
-        <img 
-          src={ad2} 
-          alt="AD2" 
-          className="w-full object-cover object-center" 
-          // h-48 sets the height, object-cover ensures it fills the space without stretching
-        />
       </div>
     </div>
   );

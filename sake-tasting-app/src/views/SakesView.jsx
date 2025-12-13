@@ -23,6 +23,15 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
                 </h2>
                 <p className="text-blue-900 text-center">"Cheers" in Japanese</p>
             </Card>
+
+            <div className="w-full rounded-xl overflow-hidden shadow-lg border-2">
+                <img 
+                    src={ad1} 
+                    alt="AD1" 
+                    className="w-full object-cover object-center" 
+                />
+            </div>
+            
             <div className="space-y-4">
                 {sakeData.map((sake) => (
                     <SakeCard
