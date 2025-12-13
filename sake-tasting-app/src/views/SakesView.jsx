@@ -24,7 +24,7 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
                         sake={sake}
                         ranking={rankings[sake.id]}
                         updateRanking={updateRanking}
-                        stampLogo={stampLogo} // 💡 Logo passed as prop
+                        //stampLogo={stampLogo} //  Logo passed as prop
                     />
                 ))}
             </div>

@@ -22,7 +22,7 @@ const MapView = () => {
                 </p>
             </Card>
 
-            <div className="w-full rounded-xl overflow-hidden shadow-lg border-2">
+            <div className="w-full rounded-xl overflow-hidden">
                 <img 
                     src={map} 
                     alt="Map" 
@@ -31,7 +31,7 @@ const MapView = () => {
                 />
             </div>
 
-            <div className="w-full rounded-xl overflow-hidden shadow-lg border-2">
+            <div className="w-full rounded-xl overflow-hidden">
                 <img 
                     src={key} 
                     alt="Key" 

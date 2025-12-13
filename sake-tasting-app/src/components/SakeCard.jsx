@@ -36,6 +36,8 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking, stampLogo }) => {
         }
     };
 
+    const activeStampLogo = sake.stampImage;
+
     return (
         <Card className="bg-yellow-50 flex flex-col justify-between items-start space-y-3">
             {/* Sake Header */}
@@ -100,7 +102,7 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking, stampLogo }) => {
                     <StarRating rating={currentRating} size={24} onRate={handleRating} />
                 </div>
 
-                {/* 🚀 STAMP BUTTON OVERHAUL */}
+                {/* STAMP BUTTON OVERHAUL */}
                 <div className="flex flex-col items-end">
                     <button
                         onClick={handleStamp}
@@ -115,7 +117,7 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking, stampLogo }) => {
                             // 🚀 STATE 1: STAMPED (Display Custom Logo)
                             <div className="flex flex-col items-center justify-center w-full h-full">
                                 <img 
-                                    src={stampLogo} 
+                                    src={activeStampLogo} 
                                     alt="Stamped" 
                                     className="w-full h-full object-contain p-2" 
                                 />
