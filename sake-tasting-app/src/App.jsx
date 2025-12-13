@@ -1,14 +1,12 @@
-// --- src/App.jsx ---
 
 import React, { useState, Suspense, useEffect } from 'react';
-// 💡 Ensure all necessary icons are imported
 import { Wine, List, Map, Book, UserCircle, Sparkles, Cherry, Tent, X } from 'lucide-react'; 
 
 // Import local modularized files
 import { SAKE_DATA, VIEWS, VENDOR_DATA } from './config/constants';
 import useFirebase from './hooks/useFirebase';
 import useSakeRankings from './hooks/useSakeRankings';
-import useLocalStorage from './hooks/useLocalStorage'; // 💡 REQUIRED for retrieving the userName
+import useLocalStorage from './hooks/useLocalStorage'; // REQUIRED for retrieving the userName
 import { Loader, ErrorMessage } from './components/Utility';
 import Modal from './components/Modal';
 import logo from './custom_image/HSM_Yellow_Emblem.png';
@@ -72,7 +70,6 @@ const App = () => {
         );
     };
 
-    // 🚀 4. NavItem updated to accept displayUserName and use the correct label logic
     const NavItem = ({ view, currentView, setCurrentView, displayUserName }) => {
         const isActive = view === currentView;
         

@@ -13,14 +13,14 @@ const OmakaseCard = ({ item }) => {
             return {
                 bg: 'bg-pink-100',          
                 border: 'border-pink-400',  
-                headerText: 'text-pink-800' // Corrected text color to match pink theme
+                headerText: 'text-pink-800'
             };
         } else if (prefix === 'w') {
             // Orange theme for Whisky (IDs starting with 'w')
             return {
                 bg: 'bg-orange-100',        
                 border: 'border-orange-400',
-                headerText: 'text-orange-800' // Corrected text color to match orange theme
+                headerText: 'text-orange-800' 
             };
         } else {
             // Default colors for unknown IDs
@@ -41,7 +41,6 @@ const OmakaseCard = ({ item }) => {
             {/* Header Content */}
             <div className="w-full">
                 <div className="flex justify-between items-center mb-1">
-                    {/* 🚀 FIX 1: Change single quotes to BACKTICKS (`) */}
                     <h3 className={`text-lg font-bold ${colors.headerText}`}>
                         {item.name}
                     </h3>
@@ -62,9 +61,7 @@ const OmakaseCard = ({ item }) => {
 
             {/* For Sale Call to Action */}
             <div className="w-full flex justify-center items-center pt-2 border-t border-blue-100 mt-3">
-                {/* 🚀 FIX 2: Change single quotes to BACKTICKS (`) */}
                 <DollarSign className={`w-5 h-5 mr-2 ${colors.headerText}`}/>
-                {/* 🚀 FIX 3: Change single quotes to BACKTICKS (`) */}
                 <span className={`text-lg font-bold ${colors.headerText}`}>Available for Purchase</span>
             </div>
         </Card>

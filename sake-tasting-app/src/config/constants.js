@@ -1,4 +1,3 @@
-// Remove the explicit import of 'Scan' icon from lucide-react in your main file
 // Only include the static data and config here
 
 import stamp1 from '../custom_image/stamps/HK_01.png';

@@ -11,7 +11,6 @@ import key from '../custom_image/key.png';
 const MapView = () => {
     return (
         <div className="p-4 flex flex-col items-center space-y-6">
-            {/* 🚀 NEW: Custom Image Banner */}
             <Card className="bg-yellow-100 border-yellow-100">
                 <h4 className="text-3xl font-extrabold text-blue-900 text-center">
                     MAP

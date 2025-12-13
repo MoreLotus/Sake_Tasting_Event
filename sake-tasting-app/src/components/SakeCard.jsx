@@ -1,4 +1,3 @@
-// --- src/components/SakeCard.jsx ---
 
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, Wine, Package, Edit2, ChevronDown, ChevronUp } from 'lucide-react';
@@ -123,7 +122,7 @@ const SakeCard = React.memo(({ sake, ranking, updateRanking, stampLogo }) => {
                                 />
                             </div>
                         ) : (
-                            // 🚀 STATE 2: NOT STAMPED (Display Empty Circle and Label)
+                            // STATE 2: NOT STAMPED (Display Empty Circle and Label)
                             <div className="flex flex-col items-center text-center text-gray-500 hover:text-blue-600 transition-colors">
                                 {/* Empty Circle Visual */}
                                 <div className="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center mb-1">

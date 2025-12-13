@@ -1,8 +1,6 @@
-// --- src/views/WelcomeView.jsx ---
-
 import React from 'react';
 import { Card } from '../components/Utility';
-// 💡 Added User and UserRound icons for the input field
+// Added User and UserRound icons for the input field
 import { Sparkles, Cherry, Wine, User, UserRound } from 'lucide-react'; 
 import ad1 from '../custom_image/AD_1.png';
 import ad2 from '../custom_image/AD_2.png';
@@ -100,7 +98,7 @@ const WelcomeView = ({ onClose }) => {
             />
       </div>
 
-      {/* NEW: CONTINUE BUTTON */}
+      {/* CONTINUE BUTTON */}
       <div className="w-full max-w-md mt-6">
         <button
           onClick={onClose} // Triggers the close function passed from App.jsx

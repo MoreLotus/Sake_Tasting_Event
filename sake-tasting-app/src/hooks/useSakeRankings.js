@@ -3,9 +3,9 @@ import { doc, setDoc, onSnapshot, collection } from 'firebase/firestore';
 import { logEvent } from 'firebase/analytics'; 
 import { appId, SAKE_DATA } from '../config/constants';
 
-// 🚀 FIX 1: ADDED 'analytics' to the list of expected arguments (props)
+// ADDED 'analytics' to the list of expected arguments (props)
 const useSakeRankings = (db, userId, isAuthReady, analytics) => { 
-    // 🚀 FIX 2: Set the initial loading state back to TRUE
+    //  Set the initial loading state back to TRUE
     const [rankings, setRankings] = useState({});
     const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(null);
@@ -78,7 +78,7 @@ const useSakeRankings = (db, userId, isAuthReady, analytics) => {
         try {
             await setDoc(docRef, updatePayload, { merge: true });
             
-            // 🚀 ANALYTICS TRACKING: Log event on successful update
+            // ANALYTICS TRACKING: Log event on successful update
             if (analytics && (updates.tasted || updates.rating)) {
                 const sake = SAKE_DATA.find(s => s.id === sakeId);
                 logEvent(analytics, 'sake_ranked_stamped', {
