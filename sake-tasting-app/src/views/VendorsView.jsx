@@ -2,6 +2,9 @@
 import React from 'react';
 import { Card } from '../components/Utility';
 import { ShoppingBag, Instagram } from 'lucide-react'; 
+
+import ad1 from '../custom_image/AD_1.png';
+import ad2 from '../custom_image/AD_2.png';
 // NOTE: VENDOR_DATA is imported by App.jsx and passed down as a prop.
 
 const VendorsView = ({ vendorData }) => {
@@ -15,6 +18,15 @@ const VendorsView = ({ vendorData }) => {
         </h2>
         <p className="text-sm text-blue-950">Below is a list of all the food trucks and vendors here. Make sure to give them a visit!</p>
       </Card>
+
+      <div className="w-full rounded-xl overflow-hidden shadow-lg border-2">
+        <img 
+          src={ad1} 
+          alt="AD1" 
+          className="w-full object-cover object-center" 
+          // h-48 sets the height, object-cover ensures it fills the space without stretching
+        />
+      </div>
 
       {/* List of Vendors */}
       <div className="space-y-3">
@@ -44,6 +56,15 @@ const VendorsView = ({ vendorData }) => {
             
           </Card>
         ))}
+      </div>
+      
+      <div className="w-full rounded-xl overflow-hidden shadow-lg border-2">
+        <img 
+          src={ad2} 
+          alt="AD2" 
+          className="w-full object-cover object-center" 
+          // h-48 sets the height, object-cover ensures it fills the space without stretching
+        />
       </div>
     </div>
   );

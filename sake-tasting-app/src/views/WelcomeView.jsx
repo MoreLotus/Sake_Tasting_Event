@@ -4,8 +4,8 @@ import React from 'react';
 import { Card } from '../components/Utility';
 // 💡 Added User and UserRound icons for the input field
 import { Sparkles, Cherry, Wine, User, UserRound } from 'lucide-react'; 
-import logo1 from '../custom_image/HK_HSM.png';
-import logo2 from '../custom_image/HSM_Red_Emblem.png';
+import ad1 from '../custom_image/AD_1.png';
+import ad2 from '../custom_image/AD_2.png';
 import logo3 from '../custom_image/arizona_sake.jpg';
 import useLocalStorage from '../hooks/useLocalStorage';
 
@@ -27,7 +27,7 @@ const WelcomeView = ({ onClose }) => {
   const displayUserName = userName || 'Izakaya Guest';
 
   return (
-    <div className="p-4 space-y-6 flex flex-col items-center text-center">
+    <div className="p-4 space-y-4 flex flex-col items-center text-center">
       
       {/* Event Header Card (Yellow/Blue Theme) */}
       <Card className="bg-yellow-100 border-yellow-100 shadow-lg w-full max-w-md">
@@ -48,7 +48,7 @@ const WelcomeView = ({ onClose }) => {
         
         {/* Display the Name (large and visible) */}
         {/* Applied font-handwriting style for personalization */}
-        <p className="text-5xl font-handwriting text-blue-800 truncate mb-4 px-2"> 
+        <p className="text-4xl font-handwriting text-blue-800 truncate mb-4 px-2"> 
           {displayUserName}
         </p>
 
@@ -82,6 +82,24 @@ const WelcomeView = ({ onClose }) => {
         </p>
       </Card>
 
+      <div className="w-full rounded-xl overflow-hidden shadow-lg border-2">
+            <img 
+                  src={ad1} 
+                  alt="AD1" 
+                  className="w-full object-cover object-center" 
+                  // h-48 sets the height, object-cover ensures it fills the space without stretching
+            />
+      </div>
+
+      <div className="w-full rounded-xl overflow-hidden shadow-lg border-2">
+            <img 
+                  src={ad2} 
+                  alt="AD2" 
+                  className="w-full object-cover object-center" 
+                  // h-48 sets the height, object-cover ensures it fills the space without stretching
+            />
+      </div>
+
       {/* NEW: CONTINUE BUTTON */}
       <div className="w-full max-w-md mt-6">
         <button
@@ -91,11 +109,6 @@ const WelcomeView = ({ onClose }) => {
           Begin Tasting Journey!
         </button>
       </div>
-
-      {/* Footer */}
-      <p className="text-sm text-gray-600 mt-4 pb-4">
-        Don't forget to visit our amazing Food Vendors!
-      </p>
 
     </div>
   );
