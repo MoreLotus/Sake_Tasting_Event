@@ -4,7 +4,7 @@ import { Card, StarRating } from '../components/Utility';
 import stamp from '../custom_image/hello_kitty.png';
 import map from '../custom_image/map.png';
 import logo1 from '../custom_image/suntory.png';
-import logo2 from '../custom_image/arizona_sake.png';
+import logo2 from '../custom_image/arizona_sake.jpg';
 import logo3 from '../custom_image/wren_house.jpg';
 import key from '../custom_image/key.png';
 
