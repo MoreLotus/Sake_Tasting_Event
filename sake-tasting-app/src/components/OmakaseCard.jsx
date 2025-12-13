@@ -1,5 +1,3 @@
-// --- src/components/OmakaseCard.jsx (FIXED) ---
-
 import React from 'react';
 import { DollarSign } from 'lucide-react'; 
 import { Card } from './Utility';
