@@ -37,14 +37,12 @@ const SakesView = ({ sakeData, rankings, updateRanking }) => {
 
             {/* OMAKASE/FOR-SALE SECTION HEADER */}
             <div className="pt-6">
-                <Card className="bg-red-700 text-white border-red-800 shadow-xl">
+                <Card className="bg-blue-50 text-red-700 border-red-800 shadow-xl">
                     <h2 className="text-2xl font-black flex items-center justify-center mb-1">
                         <Diamond className="w-6 h-6 mr-2 text-yellow-300 fill-yellow-300" />
-                        OMAKASE (For Sale)
+                        OMAKASE (Purchase separately at B2)
+                        <Diamond className="w-6 h-6 mr-2 text-yellow-300 fill-yellow-300" />
                     </h2>
-                    <p className="text-md font-semibold text-center opacity-90">
-                        Ask staff for pricing and bottle availability. Not for passport stamping.
-                    </p>
                 </Card>
             </div>
             
